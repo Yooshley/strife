@@ -78,11 +78,26 @@ void AStrifeCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCom
 	PlayerInputComponent->BindAction("Crouch", IE_Pressed, this, &AStrifeCharacter::CrouchInput);
 	PlayerInputComponent->BindAction("Aim", IE_Pressed, this, &AStrifeCharacter::AimInputPressed);
 	PlayerInputComponent->BindAction("Aim", IE_Released, this, &AStrifeCharacter::AimInputReleased);
+	PlayerInputComponent->BindAction("Fire", IE_Pressed, this, &AStrifeCharacter::FireInputPressed);
+	PlayerInputComponent->BindAction("Fire", IE_Released, this, &AStrifeCharacter::FireInputReleased);
 	
 	PlayerInputComponent->BindAxis("MoveForward", this, &AStrifeCharacter::MoveForward);
 	PlayerInputComponent->BindAxis("MoveRightward", this, &AStrifeCharacter::MoveRightward);
 	PlayerInputComponent->BindAxis("Turn", this, &AStrifeCharacter::Turn);
 	PlayerInputComponent->BindAxis("LookUp", this, &AStrifeCharacter::LookUp);
+}
+
+void AStrifeCharacter::PlayFireMontage(bool bAiming)
+{
+	if(CombatComponent == nullptr || CombatComponent->EquippedWeapon == nullptr) return;
+
+	UAnimInstance* AnimInstance =  GetMesh()->GetAnimInstance();
+	if(AnimInstance && FireWeaponMontage)
+	{
+		AnimInstance->Montage_Play(FireWeaponMontage);
+		FName SectionName = bAiming ? FName("RifleAim") : FName("RifleHip");
+		AnimInstance->Montage_JumpToSection(SectionName);
+	}
 }
 
 void AStrifeCharacter::MoveForward(float Value)
@@ -208,17 +223,14 @@ void AStrifeCharacter::AimOffset(float DeltaTime)
 		{
 			InterpAimOffsetYaw = AimOffsetYaw;
 		}
-		bUseControllerRotationYaw = true;
+		bUseControllerRotationYaw = false;
 		TurnInPlace(DeltaTime);
 	}
 	if(Speed > 0.f || bIsFalling)
 	{
 		StartingAimRotation = FRotator(0.f, GetBaseAimRotation().Yaw, 0.f);
 		AimOffsetYaw = 0.f;
-		if(!IsAiming())
-		{
-			bUseControllerRotationYaw = false;
-		}
+		bUseControllerRotationYaw = true;
 		TurningInPlace = ETurningInPlace::ETIP_None;
 	}
 	
@@ -244,6 +256,22 @@ void AStrifeCharacter::Jump()
 	else
 	{
 		Super::Jump();
+	}
+}
+
+void AStrifeCharacter::FireInputPressed()
+{
+	if(CombatComponent)
+	{
+		CombatComponent->SetFiring(true);
+	}
+}
+
+void AStrifeCharacter::FireInputReleased()
+{
+	if(CombatComponent)
+	{
+		CombatComponent->SetFiring(false);
 	}
 }
 
@@ -301,6 +329,12 @@ AWeapon* AStrifeCharacter::GetEquippedWeapon()
 {
 	if(CombatComponent == nullptr) return nullptr;
 	return CombatComponent->EquippedWeapon;
+}
+
+FVector AStrifeCharacter::GetHitTarget() const
+{
+	if(CombatComponent == nullptr) return FVector();
+	return CombatComponent->TraceHitTarget;
 }
 
 void AStrifeCharacter::Tick(float DeltaTime)

@@ -5,6 +5,7 @@
 
 #include "StrifeCharacter.h"
 #include "GameFramework/CharacterMovementComponent.h"
+#include "Kismet/KismetMathLibrary.h"
 #include "Strife/Weapon/Weapon.h"
 
 void UStrifeAnimInstance::NativeInitializeAnimation()
@@ -75,5 +76,18 @@ void UStrifeAnimInstance::NativeUpdateAnimation(float DeltaSeconds)
 		StrifeCharacter->GetMesh()->TransformToBoneSpace(FName("RightHand"), LeftHandTransform.GetLocation(), FRotator::ZeroRotator, OutPosition, OutRotation);
 		LeftHandTransform.SetLocation(OutPosition);
 		LeftHandTransform.SetRotation(FQuat(OutRotation));
+
+		if(StrifeCharacter->IsLocallyControlled()) //accurate orientation of weapon based on crosshair
+		{
+			FTransform RightHandTransform = StrifeCharacter->GetMesh()->GetSocketTransform(FName("RightHandSocket"), RTS_World);
+			RightHandRotation = UKismetMathLibrary::FindLookAtRotation(RightHandTransform.GetLocation(), StrifeCharacter->GetHitTarget());
+			RightHandRotation.Yaw = -90 + RightHandRotation.Yaw;
+
+			FTransform MuzzleTipTransform = EquippedWeapon->GetWeaponMesh()->GetSocketTransform(FName("MuzzleFlash"), RTS_World);
+			FVector MuzzleX(FRotationMatrix(MuzzleTipTransform.GetRotation().Rotator()).GetUnitAxis(EAxis::X));
+			DrawDebugLine(GetWorld(), MuzzleTipTransform.GetLocation(), MuzzleTipTransform.GetLocation() + MuzzleX * 1000.f, FColor::Red);
+			DrawDebugLine(GetWorld(), MuzzleTipTransform.GetLocation(), StrifeCharacter->GetHitTarget(), FColor::Yellow);
+			
+		}
 	}
 }

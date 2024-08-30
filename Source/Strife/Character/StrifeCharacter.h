@@ -18,6 +18,7 @@ public:
 	virtual void PostInitializeComponents() override;
 	virtual void Tick(float DeltaTime) override;
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
+	void PlayFireMontage(bool bAiming);
 
 protected:
 	virtual void BeginPlay() override;
@@ -32,6 +33,8 @@ protected:
 	void AimInputReleased();
 	void AimOffset(float DeltaTime);
 	virtual void Jump() override;
+	void FireInputPressed();
+	void FireInputReleased();
 
 private:
 	UPROPERTY(VisibleAnywhere, Category = Camera)
@@ -63,6 +66,9 @@ private:
 	ETurningInPlace TurningInPlace;
 	void TurnInPlace(float DeltaTime);
 
+	UPROPERTY(EditAnywhere, Category = Combat)
+	class UAnimMontage* FireWeaponMontage;
+
 public:
 	void SetOverlappingWeapon(AWeapon* Weapon);
 
@@ -76,4 +82,6 @@ public:
 	AWeapon* GetEquippedWeapon();
 
 	FORCEINLINE ETurningInPlace GetTurningInPlace() const { return TurningInPlace; }
+
+	FVector GetHitTarget() const;
 };
