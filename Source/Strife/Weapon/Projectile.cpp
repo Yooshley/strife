@@ -7,6 +7,8 @@
 #include "GameFramework/ProjectileMovementComponent.h"
 #include "Kismet/GameplayStatics.h"
 #include "Sound/SoundCue.h"
+#include "Strife/Strife.h"
+#include "Strife/Character/StrifeCharacter.h"
 
 AProjectile::AProjectile()
 {
@@ -19,6 +21,7 @@ AProjectile::AProjectile()
 	CollisionBoxComponent->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
 	CollisionBoxComponent->SetCollisionResponseToAllChannels(ECR_Ignore);
 	CollisionBoxComponent->SetCollisionResponseToChannel(ECC_WorldStatic, ECR_Block);
+	CollisionBoxComponent->SetCollisionResponseToChannel(ECC_SkeletalMesh, ECR_Block);
 
 	ProjectileMovementComponent = CreateDefaultSubobject<UProjectileMovementComponent>(FName("ProjectileMovementComponent"));
 	ProjectileMovementComponent->bRotationFollowsVelocity = true;

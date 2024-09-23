@@ -40,29 +40,31 @@ void UStrifeAnimInstance::NativeUpdateAnimation(float DeltaSeconds)
 	bIsCrouched = StrifeCharacter->bIsCrouched;
 	bIsAiming = StrifeCharacter->IsAiming();
 	TurningInPlace = StrifeCharacter->GetTurningInPlace();
-
-	// //This is for 4-Directional movement animations, does not look very good. Deprecated with 8-Directional movement animations
-	// //Strafing
-	// FRotator AimRotation = StrifeCharacter->GetBaseAimRotation();
-	// FRotator MovementRotation = UKismetMathLibrary::MakeRotFromX(StrifeCharacter->GetVelocity());
-	// FRotator DeltaRot = UKismetMathLibrary::NormalizedDeltaRotator(MovementRotation, AimRotation);
-	// DeltaRotation = FMath::RInterpTo(DeltaRotation, DeltaRot, DeltaSeconds, 15.f);
-	// YawOffset = DeltaRotation.Yaw;
-	//
-	// //Leaning
-	// CharacterRotationLastFrame = CharacterRotationThisFrame;
-	// CharacterRotationThisFrame = StrifeCharacter->GetActorRotation();
-	// const FRotator Delta = UKismetMathLibrary::NormalizedDeltaRotator(CharacterRotationThisFrame, CharacterRotationLastFrame);
-	// const float Target = Delta.Yaw / DeltaSeconds;
-	// const float Interp = FMath::FInterpTo(Lean, Target, DeltaSeconds, 6.f);
-	// Lean = FMath::Clamp(Interp, -90.f, 90.f);
-
-	const FVector WorldVelocity = StrifeCharacter->GetVelocity();
-	const FRotator ActorRotation = StrifeCharacter->GetActorRotation();
-	const FVector LocalVelocity = ActorRotation.UnrotateVector(WorldVelocity);
+	bShouldRotateRootBone = StrifeCharacter->ShouldRotateRootBone();
+	bIsDead = StrifeCharacter->IsDead();
 	
-	HValue = LocalVelocity.Y;
-	VValue = LocalVelocity.X;
+	//Strafing
+	FRotator AimRotation = StrifeCharacter->GetBaseAimRotation();
+	FRotator MovementRotation = UKismetMathLibrary::MakeRotFromX(StrifeCharacter->GetVelocity());
+	FRotator DeltaRot = UKismetMathLibrary::NormalizedDeltaRotator(MovementRotation, AimRotation);
+	DeltaRotation = FMath::RInterpTo(DeltaRotation, DeltaRot, DeltaSeconds, 15.f);
+	YawOffset = DeltaRotation.Yaw;
+	
+	//Leaning
+	CharacterRotationLastFrame = CharacterRotationThisFrame;
+	CharacterRotationThisFrame = StrifeCharacter->GetActorRotation();
+	const FRotator Delta = UKismetMathLibrary::NormalizedDeltaRotator(CharacterRotationThisFrame, CharacterRotationLastFrame);
+	const float Target = Delta.Yaw / DeltaSeconds;
+	const float Interp = FMath::FInterpTo(Lean, Target, DeltaSeconds, 6.f);
+	Lean = FMath::Clamp(Interp, -90.f, 90.f);
+
+	//8 directional animations w/o leaning
+	// const FVector WorldVelocity = StrifeCharacter->GetVelocity();
+	// const FRotator ActorRotation = StrifeCharacter->GetActorRotation();
+	// const FVector LocalVelocity = ActorRotation.UnrotateVector(WorldVelocity);
+	//
+	// HValue = LocalVelocity.Y;
+	// VValue = LocalVelocity.X;
 
 	AimOffsetYaw = StrifeCharacter->GetAimOffsetYaw();
 	AimOffsetPitch = StrifeCharacter->GetAimOffsetPitch();
@@ -70,24 +72,25 @@ void UStrifeAnimInstance::NativeUpdateAnimation(float DeltaSeconds)
 	//FABRIK IK for left hand placement relative to right hand bone
 	if(bIsWeaponEquipped && EquippedWeapon && EquippedWeapon->GetWeaponMesh() && StrifeCharacter->GetMesh())
 	{
-		LeftHandTransform = EquippedWeapon->GetWeaponMesh()->GetSocketTransform(FName("LeftHandSocket"), RTS_World);
+		LeftHandTransform = EquippedWeapon->GetWeaponMesh()->GetSocketTransform(FName("grip"), RTS_World);
 		FVector OutPosition;
 		FRotator OutRotation;
-		StrifeCharacter->GetMesh()->TransformToBoneSpace(FName("RightHand"), LeftHandTransform.GetLocation(), FRotator::ZeroRotator, OutPosition, OutRotation);
+		StrifeCharacter->GetMesh()->TransformToBoneSpace(FName("hand_r"), LeftHandTransform.GetLocation(), FRotator::ZeroRotator, OutPosition, OutRotation);
 		LeftHandTransform.SetLocation(OutPosition);
 		LeftHandTransform.SetRotation(FQuat(OutRotation));
 
 		if(StrifeCharacter->IsLocallyControlled()) //accurate orientation of weapon based on crosshair
 		{
-			FTransform RightHandTransform = StrifeCharacter->GetMesh()->GetSocketTransform(FName("RightHandSocket"), RTS_World);
-			RightHandRotation = UKismetMathLibrary::FindLookAtRotation(RightHandTransform.GetLocation(), StrifeCharacter->GetHitTarget());
-			RightHandRotation.Yaw = -90 + RightHandRotation.Yaw;
-
-			FTransform MuzzleTipTransform = EquippedWeapon->GetWeaponMesh()->GetSocketTransform(FName("MuzzleFlash"), RTS_World);
-			FVector MuzzleX(FRotationMatrix(MuzzleTipTransform.GetRotation().Rotator()).GetUnitAxis(EAxis::X));
-			DrawDebugLine(GetWorld(), MuzzleTipTransform.GetLocation(), MuzzleTipTransform.GetLocation() + MuzzleX * 1000.f, FColor::Red);
-			DrawDebugLine(GetWorld(), MuzzleTipTransform.GetLocation(), StrifeCharacter->GetHitTarget(), FColor::Yellow);
+			bIsLocallyControlled = true;
+			FTransform RightHandTransform = StrifeCharacter->GetMesh()->GetSocketTransform(FName("hand_r"), RTS_World);
+			FRotator LookAtRotation = UKismetMathLibrary::FindLookAtRotation(RightHandTransform.GetLocation(), RightHandTransform.GetLocation() + (RightHandTransform.GetLocation() - StrifeCharacter->GetHitTarget()));
+			RightHandRotation = FMath::RInterpTo(RightHandRotation, LookAtRotation, DeltaSeconds, 25.f);
 			
+			//UE_LOG(LogTemp, Warning, TEXT("RightHandRotation: Pitch=%f, Yaw=%f, Roll=%f"), RightHandRotation.Pitch, RightHandRotation.Yaw, RightHandRotation.Roll);
+			// FTransform MuzzleTipTransform = EquippedWeapon->GetWeaponMesh()->GetSocketTransform(FName("MuzzleFlash"), RTS_World);
+			// FVector MuzzleX(FRotationMatrix(MuzzleTipTransform.GetRotation().Rotator()).GetUnitAxis(EAxis::X));
+			// DrawDebugLine(GetWorld(), MuzzleTipTransform.GetLocation(), MuzzleTipTransform.GetLocation() + MuzzleX * 1000.f, FColor::Red);
+			// DrawDebugLine(GetWorld(), MuzzleTipTransform.GetLocation(), StrifeCharacter->GetHitTarget(), FColor::Yellow);
 		}
 	}
 }

@@ -43,22 +43,22 @@ private:
 	UPROPERTY(BlueprintReadOnly, Category = Movement, meta = (AllowPrivateAccess = "true"))
 	bool bIsAiming;
 
-	// //This is for 4-Directional movement animations, does not look very good. Deprecated with 8-Directional movement animations
-	// UPROPERTY(BlueprintReadOnly, Category = Movement, meta = (AllowPrivateAccess = "true"))
-	// float YawOffset;
-	//
-	// UPROPERTY(BlueprintReadOnly, Category = Movement, meta = (AllowPrivateAccess = "true"))
-	// float Lean;
-	//
-	// FRotator CharacterRotationLastFrame;
-	// FRotator CharacterRotationThisFrame;
-	// FRotator DeltaRotation;
-
 	UPROPERTY(BlueprintReadOnly, Category = Movement, meta = (AllowPrivateAccess = "true"))
-	float HValue;
+	float YawOffset;
 	
 	UPROPERTY(BlueprintReadOnly, Category = Movement, meta = (AllowPrivateAccess = "true"))
-	float VValue;
+	float Lean;
+	
+	FRotator CharacterRotationLastFrame;
+	FRotator CharacterRotationThisFrame;
+	FRotator DeltaRotation;
+
+	//8 directional animations w/o leaning
+	// UPROPERTY(BlueprintReadOnly, Category = Movement, meta = (AllowPrivateAccess = "true"))
+	// float HValue;
+	//
+	// UPROPERTY(BlueprintReadOnly, Category = Movement, meta = (AllowPrivateAccess = "true"))
+	// float VValue;
 
 	UPROPERTY(BlueprintReadOnly, Category = Movement, meta = (AllowPrivateAccess = "true"))
 	float AimOffsetYaw;
@@ -74,4 +74,13 @@ private:
 
 	UPROPERTY(BlueprintReadOnly, Category = Movement, meta = (AllowPrivateAccess = "true"))
 	FRotator RightHandRotation;
+
+	UPROPERTY(BlueprintReadOnly, Category = Movement, meta = (AllowPrivateAccess = "true"))
+	bool bIsLocallyControlled;
+
+	UPROPERTY(BlueprintReadOnly, Category = Movement, meta = (AllowPrivateAccess = "true"))
+	bool bShouldRotateRootBone;
+
+	UPROPERTY(BlueprintReadOnly, Category = Movement, meta = (AllowPrivateAccess = "true"))
+	bool bIsDead;
 };

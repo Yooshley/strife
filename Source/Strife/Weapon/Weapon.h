@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "Components/PrimitiveComponent.h"
 #include "GameFramework/Actor.h"
+#include "WeaponTypes.h"
 #include "Weapon.generated.h"
 
 UENUM(BlueprintType)
@@ -26,7 +27,10 @@ public:
 	AWeapon();
 	virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
 	virtual void Tick(float DeltaTime) override;
+	virtual void OnRep_Owner() override;
+	void SetHUDAmmo();
 	void ShowPickupWidget(bool bShowWidget);
+	void Drop();
 
 protected:
 	virtual void BeginPlay() override;
@@ -71,6 +75,27 @@ private:
 	UPROPERTY(EditAnywhere)
 	TSubclassOf<class ACasing> CasingClass;
 
+	UPROPERTY(EditAnywhere, ReplicatedUsing=OnRep_Ammo)
+	int32 Ammo;
+
+	UFUNCTION()
+	void OnRep_Ammo();
+	
+	void SpendRound();
+
+	UPROPERTY(EditAnywhere)
+	int32 MagazineCapacity;
+
+	UPROPERTY()
+	class AStrifeCharacter* StrifeOwnerCharacter;
+
+	UPROPERTY()
+	class AStrifePlayerController* StrifeOwnerController;
+
+	UPROPERTY(EditAnywhere)
+	EWeaponType WeaponType;
+
+
 public:
 	void SetWeaponState(EWeaponState State);
 
@@ -93,4 +118,25 @@ public:
 
 	UPROPERTY(EditAnywhere, Category=Crosshair)
 	UTexture2D* CrosshairBottom;
+	
+	//aiming FOV
+	UPROPERTY(EditAnywhere)
+	float ZoomedFOV = 30.f;
+	
+	UPROPERTY(EditAnywhere)
+    float ZoomInterpSpeed = 15.f;
+
+	//Automatic Fire
+	UPROPERTY(EditAnywhere, Category="Combat")
+	float FireDelay = 0.15f;
+
+	UPROPERTY(EditAnywhere, Category="Combat")
+	bool bIsAutomatic = true;
+
+	FORCEINLINE float GetZoomedFOV() const { return ZoomedFOV; }
+	FORCEINLINE float GetZoomInterpSpeed() const { return ZoomInterpSpeed; }
+
+	bool IsEmpty();
+
+	FORCEINLINE EWeaponType GetWeaponType() const { return WeaponType; }
 };

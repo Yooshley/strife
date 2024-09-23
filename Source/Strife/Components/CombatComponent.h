@@ -4,9 +4,11 @@
 
 #include "CoreMinimal.h"
 #include "Components/ActorComponent.h"
+#include "Strife/HUD/StrifeHUD.h"
+#include "Strife/Weapon/WeaponTypes.h"
 #include "CombatComponent.generated.h"
 
-#define TRACE_LENGTH 90000.f;
+#define TRACE_LENGTH 75000.f;
 
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
 class STRIFE_API UCombatComponent : public UActorComponent
@@ -24,6 +26,7 @@ public:
 protected:
 	virtual void BeginPlay() override;
 	void SetAiming(bool bShouldAim);
+	void Fire();
 
 	UFUNCTION(Server, Reliable)
 	void ServerSetAiming(bool bShouldAim);
@@ -44,22 +47,27 @@ protected:
 	void SetHUDCrosshairs(float DeltaTime);
 
 private:
+	UPROPERTY()
 	class AStrifeCharacter* Character;
+	UPROPERTY()
 	class AStrifePlayerController* Controller;
+	UPROPERTY()
 	class AStrifeHUD* HUD;
 
-	//UPROPERTY(ReplicatedUsing = OnRep_EquippedWeapon)
-	UPROPERTY(Replicated)
+	UPROPERTY(ReplicatedUsing = OnRep_EquippedWeapon)
 	class AWeapon* EquippedWeapon;
-	
-	UPROPERTY(Replicated)
-	bool bIsAiming;
 
 	bool bIsFiring;
+
+	UPROPERTY(Replicated)
+	bool bIsAiming;
 
 	//HUD and Crosshairs
 	float CrosshairVelocityFactor;
 	float CrosshairFallingFactor;
+	float CrosshairAimFactor;
+	float CrosshairShootFactor;
+	FHUDPackage HUDPackage;
 
 	FVector TraceHitTarget;
 	
@@ -68,6 +76,34 @@ private:
 
 	UPROPERTY(EditAnywhere)
 	float AimWalkSpeed;
+	
+	//Aiming FOV
+	float DefaultFOV;
+	float CurrentFOV;
+    
+    void InterpFOV(float DeltaTime);
 
-public:	
+	//Automatic Fire
+	FTimerHandle FireTimer;
+	bool bCanFire = true;
+	
+	void StartFireTimer();
+	void FireTimerFinished();
+
+	bool CanFire();
+
+	UPROPERTY(ReplicatedUsing=OnRep_CarriedAmmo)
+	int32 CarriedAmmo;
+
+	UFUNCTION()
+	void OnRep_CarriedAmmo();
+
+	TMap<EWeaponType, int32> CarriedAmmoMap;
+
+	UPROPERTY(EditAnywhere)
+	int32 StartingRifleAmmo = 30;
+	
+	void InitialzeCarriedAmmo();
+
+public:
 };
