@@ -14,13 +14,15 @@ void AProjectileWeapon::Fire(const FVector& HitTarget)
 	
 	APawn* InstigatorPawn = Cast<APawn>(GetOwner());
 
-	const USkeletalMeshSocket* MuzzleFlashSocket = GetWeaponMesh()->GetSocketByName(FName("MuzzleFlash"));
+	const USkeletalMeshSocket* MuzzleFlashSocket = GetWeaponMesh()->GetSocketByName(FName("MuzzleSocket"));
 
 	if (MuzzleFlashSocket)
 	{
 		FTransform SocketTransform = MuzzleFlashSocket->GetSocketTransform(GetWeaponMesh());
-		FVector TargetVector = HitTarget - SocketTransform.GetLocation(); //vector b/w muzzle and crosshair trace
-		FRotator TargetRotation = TargetVector.Rotation();
+		//FVector TargetVector = HitTarget - SocketTransform.GetLocation(); //vector b/w muzzle and crosshair trace
+		//FRotator TargetRotation = TargetVector.Rotation();
+		FRotator TargetRotation = SocketTransform.GetRotation().Rotator();
+		TargetRotation.Pitch = 0.f;
 
 		if(ProjectileClass && InstigatorPawn)
 		{

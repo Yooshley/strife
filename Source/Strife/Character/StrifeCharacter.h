@@ -37,10 +37,11 @@ protected:
 
 	void MoveForward(float Value);
 	void MoveRightward(float Value);
-	void Turn(float Value);
-	void LookUp(float Value);
+	//void Turn(float Value);
+	//void LookUp(float Value);
 	void InteractInput();
 	void CrouchInput();
+	void ReloadInput();
 	void AimInputPressed();
 	void AimInputReleased();
 	void AimOffset(float DeltaTime);

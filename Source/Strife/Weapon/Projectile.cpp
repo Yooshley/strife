@@ -8,7 +8,6 @@
 #include "Kismet/GameplayStatics.h"
 #include "Sound/SoundCue.h"
 #include "Strife/Strife.h"
-#include "Strife/Character/StrifeCharacter.h"
 
 AProjectile::AProjectile()
 {

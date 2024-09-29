@@ -176,11 +176,11 @@ void AWeapon::Fire(const FVector& HitTarget)
 	}
 	if(CasingClass)
 	{
-		const USkeletalMeshSocket* AmmoEjectSocket = WeaponMesh->GetSocketByName(FName("AmmoEject"));
+		const USkeletalMeshSocket* CasingEjectSocket = WeaponMesh->GetSocketByName(FName("EjectSocket"));
 
-		if (AmmoEjectSocket)
+		if (CasingEjectSocket)
 		{
-			FTransform SocketTransform = AmmoEjectSocket->GetSocketTransform(WeaponMesh);
+			FTransform SocketTransform = CasingEjectSocket->GetSocketTransform(WeaponMesh);
 			UWorld* World = GetWorld();
 			if (World)
 			{

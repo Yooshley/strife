@@ -22,6 +22,7 @@ public:
 	UCombatComponent();
 
 	void EquipWeapon(class AWeapon* WeaponToEquip);
+	void Reload();
 	
 protected:
 	virtual void BeginPlay() override;
@@ -81,7 +82,7 @@ private:
 	float DefaultFOV;
 	float CurrentFOV;
     
-    void InterpFOV(float DeltaTime);
+    //void InterpFOV(float DeltaTime);
 
 	//Automatic Fire
 	FTimerHandle FireTimer;

@@ -148,6 +148,7 @@ void AStrifeCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCom
 	PlayerInputComponent->BindAction("Jump", IE_Pressed, this, &ACharacter::Jump);
 	PlayerInputComponent->BindAction("Interact", IE_Pressed, this, &AStrifeCharacter::InteractInput);
 	PlayerInputComponent->BindAction("Crouch", IE_Pressed, this, &AStrifeCharacter::CrouchInput);
+	PlayerInputComponent->BindAction("Reload", IE_Pressed, this, &AStrifeCharacter::ReloadInput);
 	PlayerInputComponent->BindAction("Aim", IE_Pressed, this, &AStrifeCharacter::AimInputPressed);
 	PlayerInputComponent->BindAction("Aim", IE_Released, this, &AStrifeCharacter::AimInputReleased);
 	PlayerInputComponent->BindAction("Fire", IE_Pressed, this, &AStrifeCharacter::FireInputPressed);
@@ -155,8 +156,8 @@ void AStrifeCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCom
 	
 	PlayerInputComponent->BindAxis("MoveForward", this, &AStrifeCharacter::MoveForward);
 	PlayerInputComponent->BindAxis("MoveRightward", this, &AStrifeCharacter::MoveRightward);
-	PlayerInputComponent->BindAxis("Turn", this, &AStrifeCharacter::Turn);
-	PlayerInputComponent->BindAxis("LookUp", this, &AStrifeCharacter::LookUp);
+	//PlayerInputComponent->BindAxis("Turn", this, &AStrifeCharacter::Turn);
+	//PlayerInputComponent->BindAxis("LookUp", this, &AStrifeCharacter::LookUp);
 }
 
 void AStrifeCharacter::PlayFireMontage(bool bAiming)
@@ -214,15 +215,15 @@ void AStrifeCharacter::MoveRightward(float Value)
 	}
 }
 
-void AStrifeCharacter::Turn(float Value)
-{
-	AddControllerYawInput(Value);
-}
+// void AStrifeCharacter::Turn(float Value)
+// {
+// 	AddControllerYawInput(Value);
+// }
 
-void AStrifeCharacter::LookUp(float Value)
-{
-	AddControllerPitchInput(Value);
-}
+// void AStrifeCharacter::LookUp(float Value)
+// {
+// 	AddControllerPitchInput(Value);
+// }
 
 void AStrifeCharacter::InteractInput()
 {
@@ -248,6 +249,14 @@ void AStrifeCharacter::CrouchInput()
 	else
 	{
 		Crouch();
+	}
+}
+
+void AStrifeCharacter::ReloadInput()
+{
+	if(CombatComponent)
+	{
+		CombatComponent->Reload();
 	}
 }
 
@@ -439,11 +448,11 @@ void AStrifeCharacter::PollInit()
 
 void AStrifeCharacter::TurnInPlace(float DeltaTime)
 {
-	if(AimOffsetYaw > 45.f)
+	if(AimOffsetYaw > 90.f)
 	{
 		TurningInPlace = ETurningInPlace::ETIP_Right;
 	}
-	else if(AimOffsetYaw < -45.f)
+	else if(AimOffsetYaw < -90.f)
 	{
 		TurningInPlace = ETurningInPlace::ETIP_Left;
 	}

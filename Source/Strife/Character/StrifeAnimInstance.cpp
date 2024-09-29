@@ -44,27 +44,27 @@ void UStrifeAnimInstance::NativeUpdateAnimation(float DeltaSeconds)
 	bIsDead = StrifeCharacter->IsDead();
 	
 	//Strafing
-	FRotator AimRotation = StrifeCharacter->GetBaseAimRotation();
-	FRotator MovementRotation = UKismetMathLibrary::MakeRotFromX(StrifeCharacter->GetVelocity());
-	FRotator DeltaRot = UKismetMathLibrary::NormalizedDeltaRotator(MovementRotation, AimRotation);
-	DeltaRotation = FMath::RInterpTo(DeltaRotation, DeltaRot, DeltaSeconds, 15.f);
-	YawOffset = DeltaRotation.Yaw;
+	// FRotator AimRotation = StrifeCharacter->GetBaseAimRotation();
+	// FRotator MovementRotation = UKismetMathLibrary::MakeRotFromX(StrifeCharacter->GetVelocity());
+	// FRotator DeltaRot = UKismetMathLibrary::NormalizedDeltaRotator(MovementRotation, AimRotation);
+	// DeltaRotation = FMath::RInterpTo(DeltaRotation, DeltaRot, DeltaSeconds, 15.f);
+	// YawOffset = DeltaRotation.Yaw;
 	
 	//Leaning
-	CharacterRotationLastFrame = CharacterRotationThisFrame;
-	CharacterRotationThisFrame = StrifeCharacter->GetActorRotation();
-	const FRotator Delta = UKismetMathLibrary::NormalizedDeltaRotator(CharacterRotationThisFrame, CharacterRotationLastFrame);
-	const float Target = Delta.Yaw / DeltaSeconds;
-	const float Interp = FMath::FInterpTo(Lean, Target, DeltaSeconds, 6.f);
-	Lean = FMath::Clamp(Interp, -90.f, 90.f);
+	// CharacterRotationLastFrame = CharacterRotationThisFrame;
+	// CharacterRotationThisFrame = StrifeCharacter->GetActorRotation();
+	// const FRotator Delta = UKismetMathLibrary::NormalizedDeltaRotator(CharacterRotationThisFrame, CharacterRotationLastFrame);
+	// const float Target = Delta.Yaw / DeltaSeconds;
+	// const float Interp = FMath::FInterpTo(Lean, Target, DeltaSeconds, 6.f);
+	// Lean = FMath::Clamp(Interp, -90.f, 90.f);
 
 	//8 directional animations w/o leaning
-	// const FVector WorldVelocity = StrifeCharacter->GetVelocity();
-	// const FRotator ActorRotation = StrifeCharacter->GetActorRotation();
-	// const FVector LocalVelocity = ActorRotation.UnrotateVector(WorldVelocity);
-	//
-	// HValue = LocalVelocity.Y;
-	// VValue = LocalVelocity.X;
+	const FVector WorldVelocity = StrifeCharacter->GetVelocity();
+	const FRotator ActorRotation = StrifeCharacter->GetActorRotation();
+	const FVector LocalVelocity = ActorRotation.neUnrotateVector(WorldVelocity);
+	
+	HValue = LocalVelocity.Y;
+	VValue = LocalVelocity.X;
 
 	AimOffsetYaw = StrifeCharacter->GetAimOffsetYaw();
 	AimOffsetPitch = StrifeCharacter->GetAimOffsetPitch();

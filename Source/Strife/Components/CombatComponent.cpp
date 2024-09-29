@@ -42,6 +42,8 @@ void UCombatComponent::SetAiming(bool bShouldAim)
 	if (Character)
 	{
 		Character->GetCharacterMovement()->MaxWalkSpeed = bIsAiming ? AimWalkSpeed : BaseWalkSpeed;
+		Character->GetCharacterMovement()->bOrientRotationToMovement = !bIsAiming;
+		Character->bUseControllerRotationYaw= bIsAiming;
 	}
 	ServerSetAiming(bIsAiming);
 }
@@ -180,24 +182,24 @@ void UCombatComponent::SetHUDCrosshairs(float DeltaTime)
 	}
 }
 
-void UCombatComponent::InterpFOV(float DeltaTime)
-{
-	if(EquippedWeapon == nullptr) return;
-
-	if(bIsAiming)
-	{
-		CurrentFOV = FMath::FInterpTo(CurrentFOV, EquippedWeapon->GetZoomedFOV(), DeltaTime, EquippedWeapon->GetZoomInterpSpeed());
-	}
-	else
-	{
-		CurrentFOV = FMath::FInterpTo(CurrentFOV, DefaultFOV, DeltaTime, EquippedWeapon->GetZoomInterpSpeed());
-	}
-
-	if(Character && Character->GetFollowCamera())
-	{
-		Character->GetFollowCamera()->SetFieldOfView(CurrentFOV);
-	}
-}
+// void UCombatComponent::InterpFOV(float DeltaTime)
+// {
+// 	if(EquippedWeapon == nullptr) return;
+//
+// 	if(bIsAiming)
+// 	{
+// 		CurrentFOV = FMath::FInterpTo(CurrentFOV, EquippedWeapon->GetZoomedFOV(), DeltaTime, EquippedWeapon->GetZoomInterpSpeed());
+// 	}
+// 	else
+// 	{
+// 		CurrentFOV = FMath::FInterpTo(CurrentFOV, DefaultFOV, DeltaTime, EquippedWeapon->GetZoomInterpSpeed());
+// 	}
+//
+// 	if(Character && Character->GetFollowCamera())
+// 	{
+// 		Character->GetFollowCamera()->SetFieldOfView(CurrentFOV);
+// 	}
+// }
 
 void UCombatComponent::StartFireTimer()
 {
@@ -264,8 +266,8 @@ void UCombatComponent::OnRep_EquippedWeapon()
 		{
 			HandSocket->AttachActor(EquippedWeapon, Character->GetMesh());
 		}
-		Character->GetCharacterMovement()->bOrientRotationToMovement = false;
-		Character->bUseControllerRotationYaw= true;
+		//Character->GetCharacterMovement()->bOrientRotationToMovement = false;
+		//Character->bUseControllerRotationYaw= true;
 	}
 }
 
@@ -275,6 +277,8 @@ void UCombatComponent::ServerSetAiming_Implementation(bool bShouldAim)
 	if (Character)
 	{
 		Character->GetCharacterMovement()->MaxWalkSpeed = bIsAiming ? AimWalkSpeed : BaseWalkSpeed;
+		Character->GetCharacterMovement()->bOrientRotationToMovement = !bIsAiming;
+		Character->bUseControllerRotationYaw= bIsAiming;
 	}
 }
 
@@ -298,7 +302,7 @@ void UCombatComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActo
 		TraceHitTarget = HitResult.ImpactPoint;
 
 		SetHUDCrosshairs(DeltaTime);
-		InterpFOV(DeltaTime);
+		//InterpFOV(DeltaTime);
 	}
 }
 
@@ -333,8 +337,10 @@ void UCombatComponent::EquipWeapon(AWeapon* WeaponToEquip)
 	{
 		Controller->SetHUDCarriedAmmo(CarriedAmmo);
 	}
+}
+
+void UCombatComponent::Reload()
+{
 	
-	Character->GetCharacterMovement()->bOrientRotationToMovement = false;
-	Character->bUseControllerRotationYaw= true;
 }
 
