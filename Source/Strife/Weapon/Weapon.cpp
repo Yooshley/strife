@@ -176,7 +176,7 @@ void AWeapon::Fire(const FVector& HitTarget)
 	}
 	if(CasingClass)
 	{
-		const USkeletalMeshSocket* AmmoEjectSocket = WeaponMesh->GetSocketByName(FName("AmmoEject"));
+		const USkeletalMeshSocket* AmmoEjectSocket = WeaponMesh->GetSocketByName(FName("EjectSocket"));
 
 		if (AmmoEjectSocket)
 		{

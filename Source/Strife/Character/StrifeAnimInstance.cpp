@@ -43,28 +43,28 @@ void UStrifeAnimInstance::NativeUpdateAnimation(float DeltaSeconds)
 	bShouldRotateRootBone = StrifeCharacter->ShouldRotateRootBone();
 	bIsDead = StrifeCharacter->IsDead();
 	
-	//Strafing
-	FRotator AimRotation = StrifeCharacter->GetBaseAimRotation();
-	FRotator MovementRotation = UKismetMathLibrary::MakeRotFromX(StrifeCharacter->GetVelocity());
-	FRotator DeltaRot = UKismetMathLibrary::NormalizedDeltaRotator(MovementRotation, AimRotation);
-	DeltaRotation = FMath::RInterpTo(DeltaRotation, DeltaRot, DeltaSeconds, 15.f);
-	YawOffset = DeltaRotation.Yaw;
-	
-	//Leaning
-	CharacterRotationLastFrame = CharacterRotationThisFrame;
-	CharacterRotationThisFrame = StrifeCharacter->GetActorRotation();
-	const FRotator Delta = UKismetMathLibrary::NormalizedDeltaRotator(CharacterRotationThisFrame, CharacterRotationLastFrame);
-	const float Target = Delta.Yaw / DeltaSeconds;
-	const float Interp = FMath::FInterpTo(Lean, Target, DeltaSeconds, 6.f);
-	Lean = FMath::Clamp(Interp, -90.f, 90.f);
+	// //Strafing
+	// FRotator AimRotation = StrifeCharacter->GetBaseAimRotation();
+	// FRotator MovementRotation = UKismetMathLibrary::MakeRotFromX(StrifeCharacter->GetVelocity());
+	// FRotator DeltaRot = UKismetMathLibrary::NormalizedDeltaRotator(MovementRotation, AimRotation);
+	// DeltaRotation = FMath::RInterpTo(DeltaRotation, DeltaRot, DeltaSeconds, 15.f);
+	// YawOffset = DeltaRotation.Yaw;
+	//
+	// //Leaning
+	// CharacterRotationLastFrame = CharacterRotationThisFrame;
+	// CharacterRotationThisFrame = StrifeCharacter->GetActorRotation();
+	// const FRotator Delta = UKismetMathLibrary::NormalizedDeltaRotator(CharacterRotationThisFrame, CharacterRotationLastFrame);
+	// const float Target = Delta.Yaw / DeltaSeconds;
+	// const float Interp = FMath::FInterpTo(Lean, Target, DeltaSeconds, 6.f);
+	// Lean = FMath::Clamp(Interp, -90.f, 90.f);
 
 	//8 directional animations w/o leaning
-	// const FVector WorldVelocity = StrifeCharacter->GetVelocity();
-	// const FRotator ActorRotation = StrifeCharacter->GetActorRotation();
-	// const FVector LocalVelocity = ActorRotation.UnrotateVector(WorldVelocity);
-	//
-	// HValue = LocalVelocity.Y;
-	// VValue = LocalVelocity.X;
+	const FVector WorldVelocity = StrifeCharacter->GetVelocity();
+	const FRotator ActorRotation = StrifeCharacter->GetActorRotation();
+	const FVector LocalVelocity = ActorRotation.UnrotateVector(WorldVelocity);
+	
+	HValue = LocalVelocity.Y;
+	VValue = LocalVelocity.X;
 
 	AimOffsetYaw = StrifeCharacter->GetAimOffsetYaw();
 	AimOffsetPitch = StrifeCharacter->GetAimOffsetPitch();
@@ -72,7 +72,7 @@ void UStrifeAnimInstance::NativeUpdateAnimation(float DeltaSeconds)
 	//FABRIK IK for left hand placement relative to right hand bone
 	if(bIsWeaponEquipped && EquippedWeapon && EquippedWeapon->GetWeaponMesh() && StrifeCharacter->GetMesh())
 	{
-		LeftHandTransform = EquippedWeapon->GetWeaponMesh()->GetSocketTransform(FName("grip"), RTS_World);
+		LeftHandTransform = EquippedWeapon->GetWeaponMesh()->GetSocketTransform(FName("GripSocket"), RTS_World);
 		FVector OutPosition;
 		FRotator OutRotation;
 		StrifeCharacter->GetMesh()->TransformToBoneSpace(FName("hand_r"), LeftHandTransform.GetLocation(), FRotator::ZeroRotator, OutPosition, OutRotation);

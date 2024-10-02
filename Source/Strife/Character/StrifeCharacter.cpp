@@ -156,7 +156,7 @@ void AStrifeCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCom
 	PlayerInputComponent->BindAxis("MoveForward", this, &AStrifeCharacter::MoveForward);
 	PlayerInputComponent->BindAxis("MoveRightward", this, &AStrifeCharacter::MoveRightward);
 	PlayerInputComponent->BindAxis("Turn", this, &AStrifeCharacter::Turn);
-	PlayerInputComponent->BindAxis("LookUp", this, &AStrifeCharacter::LookUp);
+	//PlayerInputComponent->BindAxis("LookUp", this, &AStrifeCharacter::LookUp);
 }
 
 void AStrifeCharacter::PlayFireMontage(bool bAiming)
@@ -219,10 +219,10 @@ void AStrifeCharacter::Turn(float Value)
 	AddControllerYawInput(Value);
 }
 
-void AStrifeCharacter::LookUp(float Value)
-{
-	AddControllerPitchInput(Value);
-}
+// void AStrifeCharacter::LookUp(float Value)
+// {
+// 	AddControllerPitchInput(Value);
+// }
 
 void AStrifeCharacter::InteractInput()
 {

@@ -12,260 +12,45 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4193b77f-0a7f-423c-aad6-7de12554f606" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Source/Strife/Weapon/WeaponTypes.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.Strife.dir/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.Strife/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Config/DefaultEngine.ini" beforeDir="false" afterPath="$PROJECT_DIR$/Config/DefaultEngine.ini" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/MilitaryWeapSilver/Sound/Attenuation/WeaponShot_att.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/MilitaryWeapSilver/Sound/Attenuation/WeaponShot_att.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Strife/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Strife/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/MilitaryWeapSilver/Weapons/Assault_Rifle_A.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/MilitaryWeapSilver/Weapons/Assault_Rifle_A.uasset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/MilitaryWeapSilver/Weapons/Assault_Rifle_A_Skeleton.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/MilitaryWeapSilver/Weapons/Assault_Rifle_A_Skeleton.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Mixamo/Character/Old/Soldier_Body_diffuse.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Mixamo/Character/Old/Soldier_Body_normal.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Mixamo/Character/Old/Soldier_Body_specular.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Mixamo/Character/Old/Soldier_body1.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Mixamo/Character/Old/Soldier_body1_ncl1_1.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Mixamo/Character/Old/Soldier_head6.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Mixamo/Character/Old/Soldier_head_diffuse.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Mixamo/Character/Old/Soldier_head_normal.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Mixamo/Character/Old/Soldier_head_specular.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Mixamo/Character/Old/Swat.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Mixamo/Character/Old/Swat_Anim_Take_001.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Mixamo/Character/Old/Swat_Anim_mixamo_com.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Mixamo/Character/Old/Swat_PhysicsAsset.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Mixamo/Character/Old/Swat_Skeleton.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Mixamo/Pistol/pistol_idle.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Mixamo/Pistol/pistol_jump.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Mixamo/Pistol/pistol_jump__2_.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Mixamo/Pistol/pistol_kneel_to_stand.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Mixamo/Pistol/pistol_kneeling_idle.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Mixamo/Pistol/pistol_run.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Mixamo/Pistol/pistol_run_arc.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Mixamo/Pistol/pistol_run_arc__2_.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Mixamo/Pistol/pistol_run_backward.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Mixamo/Pistol/pistol_run_backward_arc.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Mixamo/Pistol/pistol_run_backward_arc__2_.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Mixamo/Pistol/pistol_stand_to_kneel.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Mixamo/Pistol/pistol_strafe.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Mixamo/Pistol/pistol_strafe__2_.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Mixamo/Pistol/pistol_walk.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Mixamo/Pistol/pistol_walk_arc.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Mixamo/Pistol/pistol_walk_arc__2_.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Mixamo/Pistol/pistol_walk_backward.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Mixamo/Pistol/pistol_walk_backward_arc.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Mixamo/Pistol/pistol_walk_backward_arc__2_.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Mixamo/Rifle/Aim/Rifle_Aim_Down.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Mixamo/Rifle/Aim/Rifle_Aim_Idle.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Mixamo/Rifle/Aim/Rifle_Aim_Left.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Mixamo/Rifle/Aim/Rifle_Aim_Left_Down.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Mixamo/Rifle/Aim/Rifle_Aim_Left_Up.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Mixamo/Rifle/Aim/Rifle_Aim_Right.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Mixamo/Rifle/Aim/Rifle_Aim_Right_Down.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Mixamo/Rifle/Aim/Rifle_Aim_Right_Up.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Mixamo/Rifle/Aim/Rifle_Aim_Up.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Mixamo/Rifle/Aim/Rifle_Aim_Zero_Pose.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Mixamo/Rifle/Jump/Jump_Down_Trim.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Mixamo/Rifle/Jump/Jump_Down_mixamo_com.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Mixamo/Rifle/Jump/Jump_Loop_mixamo_com.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Mixamo/Rifle/Jump/Jump_Up_mixamo_com.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Mixamo/Rifle/Turn/LeftTurn_90.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Mixamo/Rifle/Turn/RightTurn_90.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Mixamo/Rifle/Turn/TurnLeft_45.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Mixamo/Rifle/Turn/TurnLeft_Loop.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Mixamo/Rifle/Turn/TurnRight_45.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Mixamo/Rifle/crouching_turn_90_left.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Mixamo/Rifle/crouching_turn_90_right.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Mixamo/Rifle/death_crouching_headshot_front.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Mixamo/Rifle/death_from_back_headshot.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Mixamo/Rifle/death_from_front_headshot.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Mixamo/Rifle/death_from_right.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Mixamo/Rifle/death_from_the_back.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Mixamo/Rifle/death_from_the_front.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Mixamo/Rifle/idle_crouching.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Mixamo/Rifle/idle_crouching_aiming.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Mixamo/Rifle/jump_down.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Mixamo/Rifle/jump_loop.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Mixamo/Rifle/jump_up.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Mixamo/Rifle/sprint_backward.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Mixamo/Rifle/sprint_backward_left.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Quaternius/Base/Animation/Base/BaseCharacter_Anim_CharacterArmature_Death.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Quaternius/Base/Animation/Base/BaseCharacter_Anim_CharacterArmature_Defeat.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Quaternius/Base/Animation/Base/BaseCharacter_Anim_CharacterArmature_Idle.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Quaternius/Base/Animation/Base/BaseCharacter_Anim_CharacterArmature_Jump.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Quaternius/Base/Animation/Base/BaseCharacter_Anim_CharacterArmature_PickUp.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Quaternius/Base/Animation/Base/BaseCharacter_Anim_CharacterArmature_Punch.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Quaternius/Base/Animation/Base/BaseCharacter_Anim_CharacterArmature_RecieveHit.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Quaternius/Base/Animation/Base/BaseCharacter_Anim_CharacterArmature_Roll.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Quaternius/Base/Animation/Base/BaseCharacter_Anim_CharacterArmature_Run.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Quaternius/Base/Animation/Base/BaseCharacter_Anim_CharacterArmature_Run_Carry.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Quaternius/Base/Animation/Base/BaseCharacter_Anim_CharacterArmature_Shoot_OneHanded.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Quaternius/Base/Animation/Base/BaseCharacter_Anim_CharacterArmature_SitDown.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Quaternius/Base/Animation/Base/BaseCharacter_Anim_CharacterArmature_StandUp.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Quaternius/Base/Animation/Base/BaseCharacter_Anim_CharacterArmature_SwordSlash.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Quaternius/Base/Animation/Base/BaseCharacter_Anim_CharacterArmature_Victory.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Quaternius/Base/Animation/Base/BaseCharacter_Anim_CharacterArmature_Walk.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Quaternius/Base/Animation/Base/BaseCharacter_Anim_CharacterArmature_Walk_Carry.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Quaternius/Base/BaseCharacter.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Quaternius/Base/BaseCharacter_PhysicsAsset.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Quaternius/Base/BaseCharacter_Skeleton.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Quaternius/Base/Face.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Quaternius/Base/Skin.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/StarterContent/Architecture/Floor_400x400.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/StarterContent/Architecture/Floor_400x400.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/StarterContent/HDRI/HDRI_Epic_Courtyard_Daylight.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/StarterContent/HDRI/HDRI_Epic_Courtyard_Daylight.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Strife/Animations/Swat/Mesh/Swat.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Strife/Animations/Swat/Mesh/Swat_Anim.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Strife/Animations/Swat/Mesh/Swat_PhysicsAsset.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Strife/Animations/Swat/Mesh/Swat_Skeleton.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Strife/Animations/Swat/Pistol/pistol_idle.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Strife/Animations/Swat/Pistol/pistol_jump.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Strife/Animations/Swat/Pistol/pistol_jump__2_.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Strife/Animations/Swat/Pistol/pistol_kneel_to_stand.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Strife/Animations/Swat/Pistol/pistol_kneeling_idle.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Strife/Animations/Swat/Pistol/pistol_run.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Strife/Animations/Swat/Pistol/pistol_run_arc.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Strife/Animations/Swat/Pistol/pistol_run_arc__2_.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Strife/Animations/Swat/Pistol/pistol_run_backward.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Strife/Animations/Swat/Pistol/pistol_run_backward_arc.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Strife/Animations/Swat/Pistol/pistol_run_backward_arc__2_.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Strife/Animations/Swat/Pistol/pistol_stand_to_kneel.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Strife/Animations/Swat/Pistol/pistol_strafe.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Strife/Animations/Swat/Pistol/pistol_strafe__2_.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Strife/Animations/Swat/Pistol/pistol_walk.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Strife/Animations/Swat/Pistol/pistol_walk_arc.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Strife/Animations/Swat/Pistol/pistol_walk_arc__2_.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Strife/Animations/Swat/Pistol/pistol_walk_backward.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Strife/Animations/Swat/Pistol/pistol_walk_backward_arc.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Strife/Animations/Swat/Pistol/pistol_walk_backward_arc__2_.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Strife/Animations/Swat/Rifle/Locomotion/Idle/idle.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Strife/Animations/Swat/Rifle/Locomotion/Idle/idle_aiming.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Strife/Animations/Swat/Rifle/Locomotion/Idle/idle_crouching.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Strife/Animations/Swat/Rifle/Locomotion/Idle/idle_crouching_aiming.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Strife/Animations/Swat/Rifle/Locomotion/Jump/jump_down.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Strife/Animations/Swat/Rifle/Locomotion/Jump/jump_loop.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Strife/Animations/Swat/Rifle/Locomotion/Jump/jump_up.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Strife/Animations/Swat/Rifle/Locomotion/Sprint/run_backward.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Strife/Animations/Swat/Rifle/Locomotion/Sprint/run_backward_left.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Strife/Animations/Swat/Rifle/Locomotion/Sprint/run_backward_right.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Strife/Animations/Swat/Rifle/Locomotion/Sprint/run_forward.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Strife/Animations/Swat/Rifle/Locomotion/Sprint/run_forward_left.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Strife/Animations/Swat/Rifle/Locomotion/Sprint/run_forward_right.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Strife/Animations/Swat/Rifle/Locomotion/Sprint/run_left.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Strife/Animations/Swat/Rifle/Locomotion/Sprint/run_right.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Strife/Animations/Swat/Rifle/Locomotion/Sprint/sprint_backward.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Strife/Animations/Swat/Rifle/Locomotion/Sprint/sprint_backward_left.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Strife/Animations/Swat/Rifle/Locomotion/Sprint/sprint_backward_right.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Strife/Animations/Swat/Rifle/Locomotion/Sprint/sprint_forward.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Strife/Animations/Swat/Rifle/Locomotion/Sprint/sprint_forward_left.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Strife/Animations/Swat/Rifle/Locomotion/Sprint/sprint_forward_right.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Strife/Animations/Swat/Rifle/Locomotion/Sprint/sprint_left.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Strife/Animations/Swat/Rifle/Locomotion/Sprint/sprint_right.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Strife/Animations/Swat/Rifle/Locomotion/Turn/Rifle_Turn_Left_45.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Strife/Animations/Swat/Rifle/Locomotion/Turn/Rifle_Turn_Left_Loop.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Strife/Animations/Swat/Rifle/Locomotion/Turn/Rifle_Turn_Right_45.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Strife/Animations/Swat/Rifle/Locomotion/Turn/Rifle_Turn_Right_Loop.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Strife/Animations/Swat/Rifle/Locomotion/Turn/crouching_turn_90_left.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Strife/Animations/Swat/Rifle/Locomotion/Turn/crouching_turn_90_right.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Strife/Animations/Swat/Rifle/Locomotion/Turn/turn_90_left.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Strife/Animations/Swat/Rifle/Locomotion/Turn/turn_90_right.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Strife/Animations/Swat/Rifle/Locomotion/Walk/walk_backward.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Strife/Animations/Swat/Rifle/Locomotion/Walk/walk_backward_left.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Strife/Animations/Swat/Rifle/Locomotion/Walk/walk_backward_right.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Strife/Animations/Swat/Rifle/Locomotion/Walk/walk_crouching_backward.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Strife/Animations/Swat/Rifle/Locomotion/Walk/walk_crouching_backward_left.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Strife/Animations/Swat/Rifle/Locomotion/Walk/walk_crouching_backward_right.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Strife/Animations/Swat/Rifle/Locomotion/Walk/walk_crouching_forward.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Strife/Animations/Swat/Rifle/Locomotion/Walk/walk_crouching_forward_left.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Strife/Animations/Swat/Rifle/Locomotion/Walk/walk_crouching_forward_right.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Strife/Animations/Swat/Rifle/Locomotion/Walk/walk_crouching_left.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Strife/Animations/Swat/Rifle/Locomotion/Walk/walk_crouching_right.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Strife/Animations/Swat/Rifle/Locomotion/Walk/walk_forward.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Strife/Animations/Swat/Rifle/Locomotion/Walk/walk_forward_left.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Strife/Animations/Swat/Rifle/Locomotion/Walk/walk_forward_right.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Strife/Animations/Swat/Rifle/Locomotion/Walk/walk_left.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Strife/Animations/Swat/Rifle/Locomotion/Walk/walk_right.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Strife/Animations/Swat/Rifle/Offset/Aim/Rifle_Aim_Center.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Strife/Animations/Swat/Rifle/Offset/Aim/Rifle_Aim_Down.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Strife/Animations/Swat/Rifle/Offset/Aim/Rifle_Aim_Left.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Strife/Animations/Swat/Rifle/Offset/Aim/Rifle_Aim_Left_Down.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Strife/Animations/Swat/Rifle/Offset/Aim/Rifle_Aim_Left_Up.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Strife/Animations/Swat/Rifle/Offset/Aim/Rifle_Aim_Right.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Strife/Animations/Swat/Rifle/Offset/Aim/Rifle_Aim_Right_Down.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Strife/Animations/Swat/Rifle/Offset/Aim/Rifle_Aim_Right_Up.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Strife/Animations/Swat/Rifle/Offset/Aim/Rifle_Aim_Up.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Strife/Animations/Swat/Rifle/Offset/Aim/Rifle_Aim_ZeroPose.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Strife/Animations/Swat/Rifle/Offset/Hip/Rifle_Hip_Center.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Strife/Animations/Swat/Rifle/Offset/Hip/Rifle_Hip_Down.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Strife/Animations/Swat/Rifle/Offset/Hip/Rifle_Hip_Left.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Strife/Animations/Swat/Rifle/Offset/Hip/Rifle_Hip_Left_2.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Strife/Animations/Swat/Rifle/Offset/Hip/Rifle_Hip_Left_Down.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Strife/Animations/Swat/Rifle/Offset/Hip/Rifle_Hip_Left_Up.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Strife/Animations/Swat/Rifle/Offset/Hip/Rifle_Hip_Right.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Strife/Animations/Swat/Rifle/Offset/Hip/Rifle_Hip_Right_Down.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Strife/Animations/Swat/Rifle/Offset/Hip/Rifle_Hip_Right_Up.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Strife/Animations/Swat/Rifle/Offset/Hip/Rifle_Hip_Up.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Strife/Animations/Swat/Rifle/Offset/Hip/Rifle_Hip_ZeroPose.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Strife/Animations/Swat/Rifle/Rifle_Firing.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Strife/Animations/Swat/Rifle/Rifle_Firing_Montage.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Strife/Animations/Swat/Rifle/death_crouching_headshot_front.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Strife/Animations/Swat/Rifle/death_from_back_headshot.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Strife/Animations/Swat/Rifle/death_from_front_headshot.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Strife/Animations/Swat/Rifle/death_from_right.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Strife/Animations/Swat/Rifle/death_from_the_back.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Strife/Animations/Swat/Rifle/death_from_the_front.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Strife/Animations/Swat/Unarmed/Updated/Unarmed_Crouched_Walking.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Strife/Animations/Swat/Unarmed/Updated/Unarmed_Falling.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Strife/Animations/Swat/Unarmed/Updated/Unarmed_Idle.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Strife/Animations/Swat/Unarmed/Updated/Unarmed_Jumping.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Strife/Animations/Swat/Unarmed/Updated/Unarmed_Landing.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Strife/Animations/Swat/Unarmed/Updated/Unarmed_Running.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Strife/Animations/Swat/Unarmed/Updated/Unarmed_Running_Slow.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Strife/Animations/Swat/Unarmed/Updated/Unarmed_Sprint.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Strife/Animations/Swat/Unarmed/Updated/Unarmed_Walking.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Strife/Animations/Swat/Unarmed/cover_to_stand.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Strife/Animations/Swat/Unarmed/cover_to_stand__2_.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Strife/Animations/Swat/Unarmed/crouched_sneaking_left.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Strife/Animations/Swat/Unarmed/crouched_sneaking_right.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Strife/Animations/Swat/Unarmed/falling_to_roll.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Strife/Animations/Swat/Unarmed/hard_landing.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Strife/Animations/Swat/Unarmed/idle__2_.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Strife/Animations/Swat/Unarmed/idle__3_.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Strife/Animations/Swat/Unarmed/idle__4_.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Strife/Animations/Swat/Unarmed/idle__5_.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Strife/Animations/Swat/Unarmed/left_cover_sneak.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Strife/Animations/Swat/Unarmed/left_turn.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Strife/Animations/Swat/Unarmed/right_cover_sneak.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Strife/Animations/Swat/Unarmed/right_turn.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Strife/Animations/Swat/Unarmed/run_to_stop.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Strife/Animations/Swat/Unarmed/stand_to_cover.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Strife/Animations/Swat/Unarmed/stand_to_cover__2_.uasset" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/Strife/Blueprints/Character/Animation/ABP_StrifeCharacter.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Strife/Blueprints/Character/Animation/ABP_StrifeCharacter.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Strife/Blueprints/Character/Animation/AO_Rifle_Aim.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Strife/Blueprints/Character/Animation/AO_Rifle_Aim.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Strife/Blueprints/Character/Animation/AO_Rifle_Hip.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Strife/Blueprints/Character/Animation/AO_Rifle_Hip.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Strife/Blueprints/Character/Animation/BS1D_Rifle_Hip.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Strife/Blueprints/Character/Animation/BS1D_Unarmed.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Strife/Blueprints/Character/Animation/BS2D_RifleHip.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Strife/Blueprints/Character/Animation/BS2D_Rifle_Aim.uasset" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/Strife/Blueprints/Character/BP_StrifeCharacter.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Strife/Blueprints/Character/BP_StrifeCharacter.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Strife/Blueprints/GameMode/BP_StrifeGameMode.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Strife/Blueprints/GameMode/BP_StrifeGameMode.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Strife/Blueprints/HUD/BP_StrifeHUD.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Strife/Blueprints/HUD/BP_StrifeHUD.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Strife/Blueprints/Weapon/BP_AssaultRifle.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Strife/Blueprints/Weapon/BP_AssaultRifle.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Strife/Blueprints/Weapon/Projectile/BP_Projectile.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Strife/Blueprints/Weapon/Projectile/BP_Projectile.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/__ExternalActors__/Strife/Maps/StrifeMap/9/SL/5GWEZF4B1YAF90BFMM9DBH.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/__ExternalActors__/Strife/Maps/StrifeMap/9/SL/5GWEZF4B1YAF90BFMM9DBH.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Plugins/MultiplayerSessions/Source/MultiplayerSessions/Private/Menu.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Plugins/MultiplayerSessions/Source/MultiplayerSessions/Private/Menu.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Strife/Sounds/Shells/shell_03_wav.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Strife/Sounds/Shells/shell_03_wav.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Strife/Sounds/Shells/shell_04_wav.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Strife/Sounds/Shells/shell_04_wav.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Strife/Sounds/Shells/shell_10_wav.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Strife/Sounds/Shells/shell_10_wav.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Strife/Sounds/Shells/shell_12_wav.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Strife/Sounds/Shells/shell_12_wav.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Strife/Sounds/Shells/shell_13_wav.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Strife/Sounds/Shells/shell_13_wav.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Strife/Sounds/Shells/shell_14_wav.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Strife/Sounds/Shells/shell_14_wav.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Strife/Sounds/Shells/shell_16_wav.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Strife/Sounds/Shells/shell_16_wav.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Strife/Sounds/Shells/shell_17_wav.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Strife/Sounds/Shells/shell_17_wav.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Strife/Sounds/Shells/shell_21_wav.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Strife/Sounds/Shells/shell_21_wav.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Strife/Sounds/Shells/shell_22_wav.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Strife/Sounds/Shells/shell_22_wav.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Strife/Sounds/Shells/shell_25_wav.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Strife/Sounds/Shells/shell_25_wav.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Strife/Sounds/Shells/shell_26_wav.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Strife/Sounds/Shells/shell_26_wav.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Strife/Sounds/Shells/shell_32_wav.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Strife/Sounds/Shells/shell_32_wav.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Strife/Sounds/Shells/shell_42_wav.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Strife/Sounds/Shells/shell_42_wav.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Strife/Sounds/Shells/shell_44_wav.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Strife/Sounds/Shells/shell_44_wav.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Strife/Sounds/Shells/shell_45_wav.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Strife/Sounds/Shells/shell_45_wav.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Strife/Sounds/Shells/shell_47_wav.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Strife/Sounds/Shells/shell_47_wav.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Strife/Sounds/Shells/shell_55_wav.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Strife/Sounds/Shells/shell_55_wav.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Strife/Sounds/Shells/shell_59_wav.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Strife/Sounds/Shells/shell_59_wav.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Strife/Sounds/Shells/shell_60_wav.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Strife/Sounds/Shells/shell_60_wav.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Strife/Sounds/Shells/shell_61_wav.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Strife/Sounds/Shells/shell_61_wav.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/__ExternalActors__/Strife/Maps/StrifeMap/5/HQ/Q42DGBOZ2OVHP6JNW6DG91.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/__ExternalActors__/Strife/Maps/StrifeMap/5/HQ/Q42DGBOZ2OVHP6JNW6DG91.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/__ExternalActors__/Strife/Maps/StrifeMap/C/GM/C7R1L4XCWXCXMT0DRES04V.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/__ExternalActors__/Strife/Maps/StrifeMap/C/GM/C7R1L4XCWXCXMT0DRES04V.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/__ExternalActors__/Strife/Maps/StrifeMap/C/KI/B362KDO0HW5XUE1784GETU.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/__ExternalActors__/Strife/Maps/StrifeMap/C/KI/B362KDO0HW5XUE1784GETU.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/__ExternalActors__/Strife/Maps/StrifeMap/D/JQ/OIJ1CSIOSRKYR6KMO00V9R.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/__ExternalActors__/Strife/Maps/StrifeMap/D/JQ/OIJ1CSIOSRKYR6KMO00V9R.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/__ExternalActors__/Strife/Maps/StrifeMap/E/G7/XXCGUO1WKVMD84EZE55JNL.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/__ExternalActors__/Strife/Maps/StrifeMap/E/G7/XXCGUO1WKVMD84EZE55JNL.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/__ExternalActors__/Strife/Maps/StrifeMap/E/W1/3QUSRYTFMCLMN0UK77JWOR.uasset" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Source/Strife/Character/StrifeAnimInstance.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/Strife/Character/StrifeAnimInstance.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Source/Strife/Character/StrifeAnimInstance.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/Strife/Character/StrifeAnimInstance.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Source/Strife/Character/StrifeCharacter.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/Strife/Character/StrifeCharacter.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Source/Strife/Character/StrifeCharacter.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/Strife/Character/StrifeCharacter.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Source/Strife/Components/CombatComponent.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/Strife/Components/CombatComponent.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/Strife/Components/CombatComponent.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/Strife/Components/CombatComponent.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/Strife/HUD/StrifeHUD.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/Strife/HUD/StrifeHUD.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/Strife/HUD/StrifeHUD.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/Strife/HUD/StrifeHUD.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/Strife/PlayerController/StrifePlayerController.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/Strife/PlayerController/StrifePlayerController.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/Strife/PlayerController/StrifePlayerController.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/Strife/PlayerController/StrifePlayerController.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/Strife/Strife.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/Strife/Strife.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/Strife/Weapon/Projectile.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/Strife/Weapon/Projectile.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/Strife/Weapon/Projectile.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/Strife/Weapon/Projectile.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/Strife/Weapon/ProjectileWeapon.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/Strife/Weapon/ProjectileWeapon.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Source/Strife/Weapon/Weapon.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/Strife/Weapon/Weapon.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/Strife/Weapon/Weapon.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/Strife/Weapon/Weapon.h" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -302,7 +87,7 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
-    "C++ Project.Strife.executor": "Debug",
+    "C++ Project.Strife.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "main",
     "ignore.virus.scanning.warn.message": "true",
