@@ -19,8 +19,10 @@ void AProjectileWeapon::Fire(const FVector& HitTarget)
 	if (MuzzleFlashSocket)
 	{
 		FTransform SocketTransform = MuzzleFlashSocket->GetSocketTransform(GetWeaponMesh());
-		FVector TargetVector = HitTarget - SocketTransform.GetLocation(); //vector b/w muzzle and crosshair trace
-		FRotator TargetRotation = TargetVector.Rotation();
+		//FVector TargetVector = HitTarget - SocketTransform.GetLocation(); //vector b/w muzzle and crosshair trace
+		//FRotator TargetRotation = TargetVector.Rotation();
+		const FRotator MuzzleRotation = SocketTransform.GetRotation().Rotator();
+		const FVector MuzzleLocation = SocketTransform.GetLocation();
 
 		if(ProjectileClass && InstigatorPawn)
 		{
@@ -30,7 +32,7 @@ void AProjectileWeapon::Fire(const FVector& HitTarget)
 			UWorld* World = GetWorld();
 			if (World)
 			{
-				World->SpawnActor<AProjectile>(ProjectileClass, SocketTransform.GetLocation(), TargetRotation, SpawnParameters);
+				World->SpawnActor<AProjectile>(ProjectileClass, MuzzleLocation, MuzzleRotation, SpawnParameters);
 			}
 		}
 	}

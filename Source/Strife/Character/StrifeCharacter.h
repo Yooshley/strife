@@ -79,7 +79,7 @@ private:
 
 	float AimOffsetYaw;
 	float InterpAimOffsetYaw;
-	float AimOffsetPitch;
+	//float AimOffsetPitch;
 	FRotator StartingAimRotation;
 
 	ETurningInPlace TurningInPlace;
@@ -157,15 +157,19 @@ public:
 	bool IsAiming();
 
 	FORCEINLINE float GetAimOffsetYaw() const { return AimOffsetYaw; }
-	FORCEINLINE float GetAimOffsetPitch() const { return AimOffsetPitch; }
+	//FORCEINLINE float GetAimOffsetPitch() const { return AimOffsetPitch; }
 
 	AWeapon* GetEquippedWeapon();
 
 	FORCEINLINE ETurningInPlace GetTurningInPlace() const { return TurningInPlace; }
 
+	FVector GetFacingDirection() const;
+	
 	FVector GetHitTarget() const;
 
 	FORCEINLINE UCameraComponent* GetFollowCamera() const { return FollowCamera; }
+	
+	FORCEINLINE USpringArmComponent* GetCameraBoom() const { return CameraBoom; }
 
 	FORCEINLINE bool ShouldRotateRootBone() const { return bShouldRotateBone; }
 

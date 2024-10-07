@@ -161,20 +161,22 @@ void AStrifeCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCom
 
 void AStrifeCharacter::PlayFireMontage(bool bAiming)
 {
+	if(!bAiming) return;
 	if(CombatComponent == nullptr || CombatComponent->EquippedWeapon == nullptr) return;
 
 	UAnimInstance* AnimInstance =  GetMesh()->GetAnimInstance();
 	if(AnimInstance && FireWeaponMontage)
 	{
 		AnimInstance->Montage_Play(FireWeaponMontage);
-		FName SectionName = bAiming ? FName("Aim") : FName("Hip");
-		AnimInstance->Montage_JumpToSection(SectionName);
+		// FName SectionName = bAiming ? FName("Aim") : FName("Hip");
+		// AnimInstance->Montage_JumpToSection(SectionName);
 	}
 }
 
 void AStrifeCharacter::PlayHitReactMontage()
 {
-	if(CombatComponent == nullptr || CombatComponent->EquippedWeapon == nullptr) return;
+	//if(CombatComponent == nullptr || CombatComponent->EquippedWeapon == nullptr) return;
+	if(CombatComponent == nullptr) return;
 
 	UAnimInstance* AnimInstance =  GetMesh()->GetAnimInstance();
 	if(AnimInstance && HitReactMontage)
@@ -311,7 +313,7 @@ void AStrifeCharacter::AimOffset(float DeltaTime)
 		bShouldRotateBone = true;
 		const FRotator CurrentAimRotation = FRotator(0.f, GetBaseAimRotation().Yaw, 0.f);
 		const FRotator DeltaAimRotation = UKismetMathLibrary::NormalizedDeltaRotator(CurrentAimRotation, StartingAimRotation);
-		AimOffsetYaw = -DeltaAimRotation.Yaw;
+		AimOffsetYaw = DeltaAimRotation.Yaw;
 		if(TurningInPlace == ETurningInPlace::ETIP_None)
 		{
 			InterpAimOffsetYaw = AimOffsetYaw;
@@ -338,7 +340,7 @@ void AStrifeCharacter::AimOffset(float DeltaTime)
 	// }
 
 	//replicating entire vector to bypass UE compression
-	AimOffsetPitch = GetBaseAimRotation().Vector().Rotation().Pitch;
+	//AimOffsetPitch = GetBaseAimRotation().Vector().Rotation().Pitch;
 }
 
 void AStrifeCharacter::SimulatedProxiesTurn()
@@ -353,7 +355,7 @@ void AStrifeCharacter::SimulatedProxiesTurn()
 		return;
 	}
 
-	AimOffsetPitch = GetBaseAimRotation().Vector().Rotation().Pitch;
+	//AimOffsetPitch = GetBaseAimRotation().Vector().Rotation().Pitch;
 	ProxyRotationLastFrame = ProxyRotationThisFrame;
 	ProxyRotationThisFrame = GetActorRotation();
 	ProxyYaw = UKismetMathLibrary::NormalizedDeltaRotator(ProxyRotationThisFrame, ProxyRotationLastFrame).Yaw;
@@ -391,7 +393,7 @@ void AStrifeCharacter::Jump()
 
 void AStrifeCharacter::FireInputPressed()
 {
-	if(CombatComponent)
+	if(CombatComponent && IsAiming())
 	{
 		CombatComponent->SetFiring(true);
 	}
@@ -439,18 +441,18 @@ void AStrifeCharacter::PollInit()
 
 void AStrifeCharacter::TurnInPlace(float DeltaTime)
 {
-	if(AimOffsetYaw > 45.f)
+	if(AimOffsetYaw > 90.f)
 	{
 		TurningInPlace = ETurningInPlace::ETIP_Right;
 	}
-	else if(AimOffsetYaw < -45.f)
+	else if(AimOffsetYaw < -90.f)
 	{
 		TurningInPlace = ETurningInPlace::ETIP_Left;
 	}
 
 	if(TurningInPlace != ETurningInPlace::ETIP_None)
 	{
-		InterpAimOffsetYaw = FMath::FInterpTo(InterpAimOffsetYaw, 0.f, DeltaTime, 2.f);
+		InterpAimOffsetYaw = FMath::FInterpTo(InterpAimOffsetYaw, 0.f, DeltaTime, 5.f);
 		AimOffsetYaw = InterpAimOffsetYaw;
 		if(FMath::Abs(AimOffsetYaw) < 15.f)
 		{
@@ -556,6 +558,12 @@ AWeapon* AStrifeCharacter::GetEquippedWeapon()
 	return CombatComponent->EquippedWeapon;
 }
 
+FVector AStrifeCharacter::GetFacingDirection() const
+{
+	FRotator ControlRotation = GetControlRotation();
+	return ControlRotation.Vector();
+}
+
 FVector AStrifeCharacter::GetHitTarget() const
 {
 	if(CombatComponent == nullptr) return FVector();
@@ -566,19 +574,20 @@ void AStrifeCharacter::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
-	if(GetLocalRole() > ROLE_SimulatedProxy && IsLocallyControlled()) //either autonomous proxy or authority
-	{
-		AimOffset(DeltaTime);
-	}
-	else
-	{
-		TimeSinceLastMovementReplicated += DeltaTime;
-		if(TimeSinceLastMovementReplicated > 0.25f) //force call SimulatedProxiesTurn if no movement to replicate
-		{
-			OnRep_ReplicatedMovement();
-		}
-		AimOffsetPitch = GetBaseAimRotation().Vector().Rotation().Pitch;
-	}
+	AimOffset(DeltaTime);
+	// if(GetLocalRole() > ROLE_SimulatedProxy && IsLocallyControlled()) //either autonomous proxy or authority
+	// {
+	// 	AimOffset(DeltaTime);
+	// }
+	// else
+	// {
+	// 	TimeSinceLastMovementReplicated += DeltaTime;
+	// 	if(TimeSinceLastMovementReplicated > 0.25f) //force call SimulatedProxiesTurn if no movement to replicate
+	// 	{
+	// 		OnRep_ReplicatedMovement();
+	// 	}
+	// 	//AimOffsetPitch = GetBaseAimRotation().Vector().Rotation().Pitch;
+	// }
 	CameraCharacterCulling();
 	PollInit();
 }

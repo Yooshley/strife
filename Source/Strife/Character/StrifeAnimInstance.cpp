@@ -67,7 +67,7 @@ void UStrifeAnimInstance::NativeUpdateAnimation(float DeltaSeconds)
 	VValue = LocalVelocity.X;
 
 	AimOffsetYaw = StrifeCharacter->GetAimOffsetYaw();
-	AimOffsetPitch = StrifeCharacter->GetAimOffsetPitch();
+	//AimOffsetPitch = StrifeCharacter->GetAimOffsetPitch();
 
 	//FABRIK IK for left hand placement relative to right hand bone
 	if(bIsWeaponEquipped && EquippedWeapon && EquippedWeapon->GetWeaponMesh() && StrifeCharacter->GetMesh())

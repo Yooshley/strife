@@ -6,6 +6,7 @@
 #include "Camera/CameraComponent.h"
 #include "Engine/SkeletalMeshSocket.h"
 #include "GameFramework/CharacterMovementComponent.h"
+#include "GameFramework/SpringArmComponent.h"
 #include "Kismet/GameplayStatics.h"
 #include "Net/UnrealNetwork.h"
 #include "Strife/Character/StrifeCharacter.h"
@@ -21,14 +22,14 @@ void UCombatComponent::BeginPlay()
 {
 	Super::BeginPlay();
 
-	if(Character)
-	{
-		if(Character->GetFollowCamera())
-		{
-			DefaultFOV = Character->GetFollowCamera()->FieldOfView;
-			CurrentFOV = DefaultFOV;
-		}
-	}
+	//if(Character)
+	//{
+		// if(Character->GetFollowCamera())
+		// {
+		// 	DefaultFOV = Character->GetFollowCamera()->FieldOfView;
+		// 	CurrentFOV = DefaultFOV;
+		// }
+	//}
 
 	if(Character->HasAuthority())
 	{
@@ -42,7 +43,10 @@ void UCombatComponent::SetAiming(bool bShouldAim)
 	if (Character)
 	{
 		Character->GetCharacterMovement()->MaxWalkSpeed = bIsAiming ? AimWalkSpeed : BaseWalkSpeed;
+		Character->GetCharacterMovement()->bOrientRotationToMovement = !bShouldAim;
+		Character->bUseControllerRotationYaw= bShouldAim;
 	}
+	//bShouldAim ? StartCameraInterp() : StopCameraInterp();
 	ServerSetAiming(bIsAiming);
 }
 
@@ -180,22 +184,75 @@ void UCombatComponent::SetHUDCrosshairs(float DeltaTime)
 	}
 }
 
-void UCombatComponent::InterpFOV(float DeltaTime)
+// void UCombatComponent::InterpFOV(float DeltaTime)
+// {
+// 	if(EquippedWeapon == nullptr) return;
+//
+// 	if(bIsAiming)
+// 	{
+// 		CurrentFOV = FMath::FInterpTo(CurrentFOV, EquippedWeapon->GetZoomedFOV(), DeltaTime, EquippedWeapon->GetZoomInterpSpeed());
+// 	}
+// 	else
+// 	{
+// 		CurrentFOV = FMath::FInterpTo(CurrentFOV, DefaultFOV, DeltaTime, EquippedWeapon->GetZoomInterpSpeed());
+// 	}
+//
+// 	if(Character && Character->GetFollowCamera())
+// 	{
+// 		Character->GetFollowCamera()->SetFieldOfView(CurrentFOV);
+// 	}
+// }
+
+// void UCombatComponent::StartCameraInterp()
+// {
+// 	if (Character && Character->GetFollowCamera())
+// 	{
+// 		DefaultCameraLocation = Character->GetFollowCamera()->GetComponentLocation();
+// 		FVector ForwardDirection = Character->GetActorForwardVector();
+// 		TargetCameraLocation = DefaultCameraLocation + (ForwardDirection * AimDistance);
+// 		bInterpCamera = true;
+// 	}
+// }
+//
+// void UCombatComponent::StopCameraInterp()
+// {
+// 	TargetCameraLocation = DefaultCameraLocation;
+// 	bInterpCamera = true;
+// }
+//
+// void UCombatComponent::InterpAim(float DeltaTime)
+// {
+// 	if (bInterpCamera && Character && Character->GetFollowCamera())
+// 	{
+// 		FVector CurrentCameraLocation = Character->GetFollowCamera()->GetComponentLocation();
+// 		FVector NewCameraLocation = FMath::VInterpTo(CurrentCameraLocation, TargetCameraLocation, DeltaTime, AimInterpSpeed);
+// 		
+// 		Character->GetFollowCamera()->SetWorldLocation(NewCameraLocation);
+// 		
+// 		if (FVector::Dist(CurrentCameraLocation, TargetCameraLocation) <= 1.f)
+// 		{
+// 			bInterpCamera = false;
+// 		}
+// 	}
+// }
+
+void UCombatComponent::AdjustCameraForAiming(float DeltaTime)
 {
-	if(EquippedWeapon == nullptr) return;
+	if(Character == nullptr) return;
 
-	if(bIsAiming)
+	USpringArmComponent* CharacterCameraBoom = Character->GetCameraBoom();
+	if(CharacterCameraBoom)
 	{
-		CurrentFOV = FMath::FInterpTo(CurrentFOV, EquippedWeapon->GetZoomedFOV(), DeltaTime, EquippedWeapon->GetZoomInterpSpeed());
-	}
-	else
-	{
-		CurrentFOV = FMath::FInterpTo(CurrentFOV, DefaultFOV, DeltaTime, EquippedWeapon->GetZoomInterpSpeed());
-	}
-
-	if(Character && Character->GetFollowCamera())
-	{
-		Character->GetFollowCamera()->SetFieldOfView(CurrentFOV);
+		if (bIsAiming)
+		{
+			const FVector AimDirection = Character->GetFacingDirection();
+			const FVector NewTargetOffset = AimDirection * AimOffsetDistance;
+			CharacterCameraBoom->TargetOffset = FMath::VInterpTo(CharacterCameraBoom->TargetOffset, NewTargetOffset, DeltaTime, AimOffsetSpeed);
+		}
+		else
+		{
+			CharacterCameraBoom->TargetOffset = FMath::VInterpTo(CharacterCameraBoom->TargetOffset, FVector::ZeroVector, DeltaTime, AimOffsetSpeed);
+		}
 	}
 }
 
@@ -221,7 +278,11 @@ bool UCombatComponent::CanFire()
 	{
 		return false;
 	}
-	return !EquippedWeapon->IsEmpty() || !bCanFire;
+	if(!bCanFire)
+	{
+		return false;
+	}
+	return !EquippedWeapon->IsEmpty();
 }
 
 void UCombatComponent::OnRep_CarriedAmmo()
@@ -264,8 +325,8 @@ void UCombatComponent::OnRep_EquippedWeapon()
 		{
 			HandSocket->AttachActor(EquippedWeapon, Character->GetMesh());
 		}
-		Character->GetCharacterMovement()->bOrientRotationToMovement = false;
-		Character->bUseControllerRotationYaw= true;
+		// Character->GetCharacterMovement()->bOrientRotationToMovement = false;
+		// Character->bUseControllerRotationYaw= true;
 	}
 }
 
@@ -275,7 +336,10 @@ void UCombatComponent::ServerSetAiming_Implementation(bool bShouldAim)
 	if (Character)
 	{
 		Character->GetCharacterMovement()->MaxWalkSpeed = bIsAiming ? AimWalkSpeed : BaseWalkSpeed;
+		Character->GetCharacterMovement()->bOrientRotationToMovement = !bShouldAim;
+		Character->bUseControllerRotationYaw= bShouldAim;
 	}
+	//bShouldAim ? StartCameraInterp() : StopCameraInterp();
 }
 
 void UCombatComponent::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const
@@ -298,7 +362,9 @@ void UCombatComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActo
 		TraceHitTarget = HitResult.ImpactPoint;
 
 		SetHUDCrosshairs(DeltaTime);
-		InterpFOV(DeltaTime);
+		//InterpAim(DeltaTime);
+		//InterpFOV(DeltaTime);
+		AdjustCameraForAiming(DeltaTime);
 	}
 }
 
@@ -333,8 +399,5 @@ void UCombatComponent::EquipWeapon(AWeapon* WeaponToEquip)
 	{
 		Controller->SetHUDCarriedAmmo(CarriedAmmo);
 	}
-	
-	Character->GetCharacterMovement()->bOrientRotationToMovement = false;
-	Character->bUseControllerRotationYaw= true;
 }
 

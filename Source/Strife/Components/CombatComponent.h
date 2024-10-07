@@ -78,10 +78,31 @@ private:
 	float AimWalkSpeed;
 	
 	//Aiming FOV
-	float DefaultFOV;
-	float CurrentFOV;
-    
-    void InterpFOV(float DeltaTime);
+	// float DefaultFOV;
+	// float CurrentFOV;
+	//void InterpFOV(float DeltaTime);
+
+	// //Aiming Camera
+	// UPROPERTY(EditAnywhere)
+	// float AimDistance = 250.f;
+	// UPROPERTY(EditAnywhere)
+	// float AimInterpSpeed = 5.f;
+	//
+	// bool bInterpCamera;
+	// FVector TargetCameraLocation;
+	// FVector DefaultCameraLocation;
+	//
+	// void StartCameraInterp();
+	// void StopCameraInterp();
+	// void InterpAim(float DeltaTime);
+
+	UPROPERTY(EditAnywhere)
+	float AimOffsetDistance = 250.f;
+
+	UPROPERTY(EditAnywhere)
+	float AimOffsetSpeed = 10.f;
+	
+	void AdjustCameraForAiming(float DeltaTime);
 
 	//Automatic Fire
 	FTimerHandle FireTimer;
