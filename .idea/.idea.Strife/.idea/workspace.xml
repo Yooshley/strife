@@ -11,36 +11,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4193b77f-0a7f-423c-aad6-7de12554f606" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Source/Strife/Components/Types/CombatState.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.Strife.dir/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Strife.dir/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.Strife/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Strife/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Config/DefaultInput.ini" beforeDir="false" afterPath="$PROJECT_DIR$/Config/DefaultInput.ini" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Quaternius/Animations/Rifle/Shoot/AM_RifleShoot.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Quaternius/Animations/Rifle/Shoot/AM_RifleShoot.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Quaternius/Characters/Hazmat/Hazmat_Skeleton.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Quaternius/Characters/Hazmat/Hazmat_Skeleton.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Strife/Blueprints/Character/Animation/ABP_StrifeCharacter.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Strife/Blueprints/Character/Animation/ABP_StrifeCharacter.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Strife/Blueprints/Character/BP_StrifeCharacter.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Strife/Blueprints/Character/BP_StrifeCharacter.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Strife/Blueprints/GameMode/BP_StrifeGameMode.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Strife/Blueprints/GameMode/BP_StrifeGameMode.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Strife/Blueprints/HUD/BP_StrifeHUD.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Strife/Blueprints/HUD/BP_StrifeHUD.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Strife/Blueprints/HUD/WBP_CharacterOverlay.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Strife/Blueprints/HUD/WBP_CharacterOverlay.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Strife/Blueprints/Weapon/BP_LaserRifle.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Strife/Blueprints/Weapon/BP_LaserRifle.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/__ExternalActors__/Strife/Maps/StrifeMap/1/Z9/3IUE8Q0N4EDRJ4GWCG7C2O.uasset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/Strife/Character/StrifeAnimInstance.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/Strife/Character/StrifeAnimInstance.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/Strife/Character/StrifeAnimInstance.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/Strife/Character/StrifeAnimInstance.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/Strife/Character/StrifeCharacter.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/Strife/Character/StrifeCharacter.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/Strife/Character/StrifeCharacter.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/Strife/Character/StrifeCharacter.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/Strife/Components/CombatComponent.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/Strife/Components/CombatComponent.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/Strife/Components/CombatComponent.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/Strife/Components/CombatComponent.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/Strife/GameMode/StrifeGameMode.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/Strife/GameMode/StrifeGameMode.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/Strife/GameMode/StrifeGameMode.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/Strife/GameMode/StrifeGameMode.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/Strife/HUD/CharacterOverlay.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/Strife/HUD/CharacterOverlay.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/Strife/HUD/StrifeHUD.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/Strife/HUD/StrifeHUD.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/Strife/HUD/StrifeHUD.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/Strife/HUD/StrifeHUD.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/Strife/PlayerController/StrifePlayerController.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/Strife/PlayerController/StrifePlayerController.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/Strife/PlayerController/StrifePlayerController.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/Strife/PlayerController/StrifePlayerController.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/Strife/Weapon/Weapon.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/Strife/Weapon/Weapon.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/Strife/Weapon/Weapon.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/Strife/Weapon/Weapon.h" afterDir="false" />
-    </list>
+    <list default="true" id="4193b77f-0a7f-423c-aad6-7de12554f606" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -601,7 +572,7 @@
       <workItem from="1730607353828" duration="4731000" />
       <workItem from="1731122771054" duration="102000" />
       <workItem from="1731122899152" duration="29743000" />
-      <workItem from="1731276761721" duration="6577000" />
+      <workItem from="1731276761721" duration="7375000" />
     </task>
     <servers />
   </component>
