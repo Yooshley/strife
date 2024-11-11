@@ -9,6 +9,7 @@
 #include "GameFramework/SpringArmComponent.h"
 #include "Kismet/GameplayStatics.h"
 #include "Net/UnrealNetwork.h"
+#include "Sound/SoundCue.h"
 #include "Strife/Character/StrifeCharacter.h"
 #include "Strife/PlayerController/StrifePlayerController.h"
 #include "Strife/Weapon/Weapon.h"
@@ -270,6 +271,10 @@ void UCombatComponent::FireTimerFinished()
 	{
 		Fire();
 	}
+	if(EquippedWeapon->IsEmpty())
+	{
+		ReloadWeapon();
+	}
 }
 
 bool UCombatComponent::CanFire()
@@ -278,11 +283,7 @@ bool UCombatComponent::CanFire()
 	{
 		return false;
 	}
-	if(!bCanFire)
-	{
-		return false;
-	}
-	return !EquippedWeapon->IsEmpty();
+	return !EquippedWeapon->IsEmpty() && bCanFire && CombatState == ECombatState::ECS_Unoccupied;
 }
 
 void UCombatComponent::OnRep_CarriedAmmo()
@@ -308,7 +309,7 @@ void UCombatComponent::Multicast_Fire_Implementation(const FVector_NetQuantize& 
 {
 	if(EquippedWeapon == nullptr) return;
 
-	if(Character)
+	if(Character && CombatState == ECombatState::ECS_Unoccupied)
 	{
 		Character->PlayFireMontage(bIsAiming);
 		EquippedWeapon->Fire(HitTarget);
@@ -327,6 +328,10 @@ void UCombatComponent::OnRep_EquippedWeapon()
 		}
 		// Character->GetCharacterMovement()->bOrientRotationToMovement = false;
 		// Character->bUseControllerRotationYaw= true;
+			if(EquippedWeapon->EquipSound)
+        {
+        	UGameplayStatics::PlaySoundAtLocation(this, EquippedWeapon->EquipSound,Character->GetActorLocation());
+        }
 	}
 }
 
@@ -349,6 +354,8 @@ void UCombatComponent::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& Out
 	DOREPLIFETIME(UCombatComponent, EquippedWeapon);
 	DOREPLIFETIME(UCombatComponent, bIsAiming);
 	DOREPLIFETIME_CONDITION(UCombatComponent, CarriedAmmo, COND_OwnerOnly);
+	DOREPLIFETIME(UCombatComponent, CombatState);
+	
 }
 
 void UCombatComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
@@ -399,5 +406,97 @@ void UCombatComponent::EquipWeapon(AWeapon* WeaponToEquip)
 	{
 		Controller->SetHUDCarriedAmmo(CarriedAmmo);
 	}
+
+	if(EquippedWeapon->EquipSound)
+	{
+		UGameplayStatics::PlaySoundAtLocation(this, EquippedWeapon->EquipSound,Character->GetActorLocation());
+	}
+
+	if(EquippedWeapon->IsEmpty())
+	{
+		ReloadWeapon();
+	}
 }
 
+void UCombatComponent::ReloadWeapon()
+{
+	if(CarriedAmmo > 0 && CombatState != ECombatState::ECS_Reloading)
+	{
+		ServerReload();
+	}
+}
+
+void UCombatComponent::EndReload()
+{
+	if(Character == nullptr) return;
+	if(Character->HasAuthority())
+	{
+		CombatState = ECombatState::ECS_Unoccupied;
+		UpdateAmmoValues();
+	}
+	if(bIsFiring)
+	{
+		Fire();
+	}
+}
+
+void UCombatComponent::ServerReload_Implementation()
+{
+	if(Character == nullptr || EquippedWeapon == nullptr) return;
+	CombatState = ECombatState::ECS_Reloading;
+	HandleReload();
+}
+
+void UCombatComponent::HandleReload()
+{
+	Character->PlayReloadMontage();
+}
+
+int32 UCombatComponent::AmountToReload()
+{
+	if(EquippedWeapon)
+	{
+		int32 RoomInMag = EquippedWeapon->GetMagazineCapacity() - EquippedWeapon->GetAmmo();
+		if(CarriedAmmoMap.Contains(EquippedWeapon->GetWeaponType()))
+		{
+			int32 AmountCarried = CarriedAmmoMap[EquippedWeapon->GetWeaponType()];
+			int32 Least = FMath::Min(RoomInMag, AmountCarried);
+			return FMath::Clamp(RoomInMag, 0, Least);
+		}
+	}
+	return 0;
+}
+
+void UCombatComponent::OnRep_CombatState()
+{
+	switch (CombatState)
+	{
+	case ECombatState::ECS_Reloading:
+		HandleReload();
+		break;
+	case ECombatState::ECS_Unoccupied:
+		if(bIsFiring)
+		{
+			Fire();
+		}
+		break;
+	default:
+		break;
+	}
+}
+
+void UCombatComponent::UpdateAmmoValues()
+{
+	int32 ReloadAmount = AmountToReload();
+	if(CarriedAmmoMap.Contains(EquippedWeapon->GetWeaponType()))
+	{
+		CarriedAmmoMap[EquippedWeapon->GetWeaponType()] -= ReloadAmount;
+		CarriedAmmo = CarriedAmmoMap[EquippedWeapon->GetWeaponType()];
+	}
+	Controller = Controller == nullptr ? Cast<AStrifePlayerController>(Character->Controller) : Controller;
+	if(Controller)
+	{
+		Controller->SetHUDCarriedAmmo(CarriedAmmo);
+	}
+	EquippedWeapon->AddAmmo(-ReloadAmount);
+}

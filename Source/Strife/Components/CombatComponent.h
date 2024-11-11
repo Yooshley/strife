@@ -6,6 +6,7 @@
 #include "Components/ActorComponent.h"
 #include "Strife/HUD/StrifeHUD.h"
 #include "Strife/Weapon/WeaponTypes.h"
+#include "Strife/Components/Types/CombatState.h"
 #include "CombatComponent.generated.h"
 
 #define TRACE_LENGTH 75000.f;
@@ -22,6 +23,12 @@ public:
 	UCombatComponent();
 
 	void EquipWeapon(class AWeapon* WeaponToEquip);
+	void ReloadWeapon();
+
+	UFUNCTION(BlueprintCallable)
+	void EndReload();
+	
+	void SetFiring(bool bShouldFire);
 	
 protected:
 	virtual void BeginPlay() override;
@@ -34,8 +41,6 @@ protected:
 	UFUNCTION()
 	void OnRep_EquippedWeapon();
 
-	void SetFiring(bool bShouldFire);
-
 	UFUNCTION(Server, Reliable)
 	void ServerFire(const FVector_NetQuantize& HitTarget);
 
@@ -45,6 +50,13 @@ protected:
 	void TraceUnderCrosshairs(FHitResult& HitResult);
 
 	void SetHUDCrosshairs(float DeltaTime);
+
+	UFUNCTION(Server, Reliable)
+	void ServerReload();
+
+	void HandleReload();
+
+	int32 AmountToReload();
 
 private:
 	UPROPERTY()
@@ -125,6 +137,14 @@ private:
 	int32 StartingRifleAmmo = 30;
 	
 	void InitialzeCarriedAmmo();
+
+	UPROPERTY(ReplicatedUsing = OnRep_CombatState)
+	ECombatState CombatState = ECombatState::ECS_Unoccupied;
+
+	UFUNCTION()
+	void OnRep_CombatState();
+
+	void UpdateAmmoValues();
 
 public:
 };

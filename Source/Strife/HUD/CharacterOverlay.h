@@ -32,4 +32,7 @@ public:
 
 	UPROPERTY(meta = (BindWidget))
 	class UTextBlock* CarriedAmmoText;
+	
+	UPROPERTY(meta = (BindWidget))
+	class UTextBlock* MatchTimerText;
 };

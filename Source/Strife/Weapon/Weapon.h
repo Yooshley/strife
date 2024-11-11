@@ -31,6 +31,7 @@ public:
 	void SetHUDAmmo();
 	void ShowPickupWidget(bool bShowWidget);
 	void Drop();
+	void AddAmmo(int32 AmmoToAdd);
 
 protected:
 	virtual void BeginPlay() override;
@@ -133,10 +134,17 @@ public:
 	UPROPERTY(EditAnywhere, Category="Combat")
 	bool bIsAutomatic = true;
 
+	UPROPERTY(EditAnywhere)
+	class USoundCue* EquipSound;
+
 	FORCEINLINE float GetZoomedFOV() const { return ZoomedFOV; }
 	FORCEINLINE float GetZoomInterpSpeed() const { return ZoomInterpSpeed; }
 
 	bool IsEmpty();
 
 	FORCEINLINE EWeaponType GetWeaponType() const { return WeaponType; }
+
+	FORCEINLINE int32 GetAmmo() const { return Ammo; }
+
+	FORCEINLINE int32 GetMagazineCapacity() const { return MagazineCapacity; }
 };

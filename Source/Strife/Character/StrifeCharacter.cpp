@@ -9,6 +9,7 @@
 #include "Components/SkeletalMeshComponent.h"
 #include "Components/WidgetComponent.h"
 #include "GameFramework/CharacterMovementComponent.h"
+#include "Kismet/GameplayStatics.h"
 #include "Kismet/KismetMathLibrary.h"
 #include "Net/UnrealNetwork.h"
 #include "Strife/Strife.h"
@@ -60,6 +61,7 @@ void AStrifeCharacter::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& Out
 	//only replicate to owning client
 	DOREPLIFETIME_CONDITION(AStrifeCharacter, OverlappingWeapon, COND_OwnerOnly);
 	DOREPLIFETIME(AStrifeCharacter, CurrentHealth);
+	DOREPLIFETIME(AStrifeCharacter, bDisableGameplay);
 }
 
 void AStrifeCharacter::PostInitializeComponents()
@@ -100,6 +102,18 @@ void AStrifeCharacter::Death()
 	GetWorldTimerManager().SetTimer(RespawnTimer, this, &AStrifeCharacter::RespawnTimerFinished, RespawnDelay);
 }
 
+void AStrifeCharacter::Destroyed()
+{
+	Super::Destroyed();
+
+	AStrifeGameMode* StrifeGameMode = Cast<AStrifeGameMode>(UGameplayStatics::GetGameMode(this));
+	bool bMatchInProgress = StrifeGameMode && StrifeGameMode->IsMatchInProgress();
+	if (CombatComponent && CombatComponent->EquippedWeapon && !bMatchInProgress)
+	{
+		CombatComponent->EquippedWeapon->Destroy();
+	}
+}
+
 void AStrifeCharacter::MulticastDeath_Implementation()
 {
 	if(StrifePlayerController)
@@ -119,8 +133,14 @@ void AStrifeCharacter::MulticastDeath_Implementation()
 	}
 	StartDissolve();
 
+	bDisableGameplay = true;
+
 	GetCharacterMovement()->DisableMovement();
 	GetCharacterMovement()->StopMovementImmediately();
+	if(CombatComponent)
+	{
+		CombatComponent->SetFiring(false);
+	}
 	if(StrifePlayerController)
 	{
 		DisableInput(StrifePlayerController);
@@ -152,6 +172,7 @@ void AStrifeCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCom
 	PlayerInputComponent->BindAction("Aim", IE_Released, this, &AStrifeCharacter::AimInputReleased);
 	PlayerInputComponent->BindAction("Fire", IE_Pressed, this, &AStrifeCharacter::FireInputPressed);
 	PlayerInputComponent->BindAction("Fire", IE_Released, this, &AStrifeCharacter::FireInputReleased);
+	PlayerInputComponent->BindAction("Reload", IE_Pressed, this, &AStrifeCharacter::ReloadInput);
 	
 	PlayerInputComponent->BindAxis("MoveForward", this, &AStrifeCharacter::MoveForward);
 	PlayerInputComponent->BindAxis("MoveRightward", this, &AStrifeCharacter::MoveRightward);
@@ -170,6 +191,27 @@ void AStrifeCharacter::PlayFireMontage(bool bAiming)
 		AnimInstance->Montage_Play(FireWeaponMontage);
 		// FName SectionName = bAiming ? FName("Aim") : FName("Hip");
 		// AnimInstance->Montage_JumpToSection(SectionName);
+	}
+}
+
+void AStrifeCharacter::PlayReloadMontage()
+{
+	if(CombatComponent == nullptr || CombatComponent->EquippedWeapon == nullptr) return;
+
+	UAnimInstance* AnimInstance =  GetMesh()->GetAnimInstance();
+	if(AnimInstance && ReloadWeaponMontage)
+	{
+		AnimInstance->Montage_Play(ReloadWeaponMontage);
+		FName SectionName;
+		switch (CombatComponent->EquippedWeapon->GetWeaponType())
+		{
+		case EWeaponType::EWT_AssaultRifle:
+			SectionName = FName("Rifle");
+			AnimInstance->Montage_JumpToSection(SectionName);
+			break;
+		default:
+			break;
+		}
 	}
 }
 
@@ -198,6 +240,7 @@ void AStrifeCharacter::PlayDeathMontage()
 
 void AStrifeCharacter::MoveForward(float Value)
 {
+	if(bDisableGameplay) return;
 	if(Controller != nullptr && Value != 0.f)
 	{
 		const FRotator YawRotation(0.f, Controller->GetControlRotation().Yaw, 0.f);
@@ -208,6 +251,7 @@ void AStrifeCharacter::MoveForward(float Value)
 
 void AStrifeCharacter::MoveRightward(float Value)
 {
+	if(bDisableGameplay) return;
 	if(Controller != nullptr && Value != 0.f)
 	{
 		const FRotator YawRotation(0.f, Controller->GetControlRotation().Yaw, 0.f);
@@ -218,6 +262,7 @@ void AStrifeCharacter::MoveRightward(float Value)
 
 void AStrifeCharacter::Turn(float Value)
 {
+	if(bDisableGameplay) return;
 	AddControllerYawInput(Value);
 }
 
@@ -228,6 +273,7 @@ void AStrifeCharacter::Turn(float Value)
 
 void AStrifeCharacter::InteractInput()
 {
+	if(bDisableGameplay) return;
 	if(CombatComponent)
 	{
 		if(HasAuthority())
@@ -243,6 +289,7 @@ void AStrifeCharacter::InteractInput()
 
 void AStrifeCharacter::CrouchInput()
 {
+	if(bDisableGameplay) return;
 	if(bIsCrouched)
 	{
 		UnCrouch();
@@ -255,6 +302,7 @@ void AStrifeCharacter::CrouchInput()
 
 void AStrifeCharacter::AimInputPressed()
 {
+	if(bDisableGameplay) return;
 	if(CombatComponent)
 	{
 		if(CombatComponent->EquippedWeapon == nullptr)
@@ -267,6 +315,7 @@ void AStrifeCharacter::AimInputPressed()
 
 void AStrifeCharacter::AimInputReleased()
 {
+	if(bDisableGameplay) return;
 	if(CombatComponent)
 	{
 		if(CombatComponent->EquippedWeapon == nullptr)
@@ -308,7 +357,7 @@ void AStrifeCharacter::AimOffset(float DeltaTime)
 	const float Speed = CalculateSpeed();
 	const bool bIsFalling = GetMovementComponent()->IsFalling();
 
-	if(Speed == 0.f && !bIsFalling)
+	if(Speed == 0.f && !bIsFalling && IsAiming())
 	{
 		bShouldRotateBone = true;
 		const FRotator CurrentAimRotation = FRotator(0.f, GetBaseAimRotation().Yaw, 0.f);
@@ -393,6 +442,7 @@ void AStrifeCharacter::Jump()
 
 void AStrifeCharacter::FireInputPressed()
 {
+	if(bDisableGameplay) return;
 	if(CombatComponent && IsAiming())
 	{
 		CombatComponent->SetFiring(true);
@@ -401,14 +451,24 @@ void AStrifeCharacter::FireInputPressed()
 
 void AStrifeCharacter::FireInputReleased()
 {
+	if(bDisableGameplay) return;
 	if(CombatComponent)
 	{
 		CombatComponent->SetFiring(false);
 	}
 }
 
+void AStrifeCharacter::ReloadInput()
+{
+	if(bDisableGameplay) return;
+	if(CombatComponent)
+	{
+		CombatComponent->ReloadWeapon();
+	}
+}
+
 void AStrifeCharacter::RecieveDamage(AActor* DamagedActor, float Damage, const UDamageType* DamageType,
-	class AController* InstigatorController, AActor* DamageCauser)
+                                     class AController* InstigatorController, AActor* DamageCauser)
 {
 	CurrentHealth = FMath::Clamp(CurrentHealth - Damage, 0.f, MaxHealth);
 	UpdateHUDHealth();
@@ -462,28 +522,28 @@ void AStrifeCharacter::TurnInPlace(float DeltaTime)
 	}
 }
 
-void AStrifeCharacter::CameraCharacterCulling()
-{
-	//Hide Character and Weapon if too close to the Camera
-	if(!IsLocallyControlled()) return;
-
-	if((FollowCamera->GetComponentLocation() - GetActorLocation()).Size() < CullingThreshold)
-	{
-		GetMesh()->SetVisibility(false);
-		if(CombatComponent && CombatComponent->EquippedWeapon && CombatComponent->EquippedWeapon->GetWeaponMesh())
-		{
-			CombatComponent->EquippedWeapon->GetWeaponMesh()->bOwnerNoSee = true;
-		}
-	}
-	else
-	{
-		GetMesh()->SetVisibility(true);
-		if(CombatComponent && CombatComponent->EquippedWeapon && CombatComponent->EquippedWeapon->GetWeaponMesh())
-		{
-			CombatComponent->EquippedWeapon->GetWeaponMesh()->bOwnerNoSee = false;
-		}
-	}
-}
+// void AStrifeCharacter::CameraCharacterCulling()
+// {
+// 	//Hide Character and Weapon if too close to the Camera
+// 	if(!IsLocallyControlled()) return;
+//
+// 	if((FollowCamera->GetComponentLocation() - GetActorLocation()).Size() < CullingThreshold)
+// 	{
+// 		GetMesh()->SetVisibility(false);
+// 		if(CombatComponent && CombatComponent->EquippedWeapon && CombatComponent->EquippedWeapon->GetWeaponMesh())
+// 		{
+// 			CombatComponent->EquippedWeapon->GetWeaponMesh()->bOwnerNoSee = true;
+// 		}
+// 	}
+// 	else
+// 	{
+// 		GetMesh()->SetVisibility(true);
+// 		if(CombatComponent && CombatComponent->EquippedWeapon && CombatComponent->EquippedWeapon->GetWeaponMesh())
+// 		{
+// 			CombatComponent->EquippedWeapon->GetWeaponMesh()->bOwnerNoSee = false;
+// 		}
+// 	}
+// }
 
 float AStrifeCharacter::CalculateSpeed()
 {
@@ -570,6 +630,12 @@ FVector AStrifeCharacter::GetHitTarget() const
 	return CombatComponent->TraceHitTarget;
 }
 
+ECombatState AStrifeCharacter::GetCombatState() const
+{
+	if(CombatComponent == nullptr) return ECombatState::ECS_MAX;
+	return CombatComponent->CombatState;
+}
+
 void AStrifeCharacter::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
@@ -588,7 +654,7 @@ void AStrifeCharacter::Tick(float DeltaTime)
 	// 	}
 	// 	//AimOffsetPitch = GetBaseAimRotation().Vector().Rotation().Pitch;
 	// }
-	CameraCharacterCulling();
+	//CameraCharacterCulling();
 	PollInit();
 }
 

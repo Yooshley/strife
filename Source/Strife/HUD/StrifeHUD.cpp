@@ -3,9 +3,15 @@
 
 #include "StrifeHUD.h"
 
+#include "Announcement.h"
 #include "CharacterOverlay.h"
 #include "Blueprint/UserWidget.h"
 #include "Engine/Engine.h"
+
+void AStrifeHUD::BeginPlay()
+{
+	Super::BeginPlay();
+}
 
 void AStrifeHUD::DrawHUD()
 {
@@ -47,13 +53,6 @@ void AStrifeHUD::DrawHUD()
 	}
 }
 
-void AStrifeHUD::BeginPlay()
-{
-	Super::BeginPlay();
-
-	AddCharacterOverlay();
-}
-
 void AStrifeHUD::AddCharacterOverlay()
 {
 	APlayerController* PlayerController = GetOwningPlayerController();
@@ -61,6 +60,16 @@ void AStrifeHUD::AddCharacterOverlay()
 	{
 		CharacterOverlay = CreateWidget<UCharacterOverlay>(PlayerController, CharacterOverlayClass);
 		CharacterOverlay->AddToViewport();
+	}
+}
+
+void AStrifeHUD::AddAnnouncement()
+{
+	APlayerController* PlayerController = GetOwningPlayerController();
+	if(PlayerController && AnnouncementClass)
+	{
+		Announcement = CreateWidget<UAnnouncement>(PlayerController, AnnouncementClass);
+		Announcement->AddToViewport();
 	}
 }
 

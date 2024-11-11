@@ -7,6 +7,7 @@
 #include "GameFramework/Character.h"
 #include "Strife/Components/Types/TurningInPlace.h"
 #include "Strife/Interfaces/InteractWithCrosshairsInterface.h"
+#include "Strife/Components/Types/CombatState.h"
 #include "StrifeCharacter.generated.h"
 
 UCLASS()
@@ -21,6 +22,7 @@ public:
 	virtual void Tick(float DeltaTime) override;
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 	void PlayFireMontage(bool bAiming);
+	void PlayReloadMontage();
 	void PlayHitReactMontage();
 	void PlayDeathMontage();
 
@@ -31,6 +33,11 @@ public:
 	
 	UFUNCTION(NetMulticast, Reliable)
 	void MulticastDeath();
+
+	virtual void Destroyed() override;
+
+	UPROPERTY(Replicated)
+	bool bDisableGameplay = false;
 
 protected:
 	virtual void BeginPlay() override;
@@ -48,6 +55,7 @@ protected:
 	virtual void Jump() override;
 	void FireInputPressed();
 	void FireInputReleased();
+	void ReloadInput();
 
 	UFUNCTION()
 	void RecieveDamage(AActor* DamagedActor, float Damage, const UDamageType* DamageType, class AController* InstigatorController, AActor* DamageCauser);
@@ -71,7 +79,7 @@ private:
 	UFUNCTION()
 	void OnRep_OverlappingWeapon(AWeapon* LastWeapon);
 
-	UPROPERTY(VisibleAnywhere)
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
 	class UCombatComponent* CombatComponent;
 
 	UFUNCTION(Server, Reliable)
@@ -85,18 +93,23 @@ private:
 	ETurningInPlace TurningInPlace;
 	void TurnInPlace(float DeltaTime);
 
-	UPROPERTY(EditAnywhere, Category = Combat)
+	//Animation Montages
+	
+	UPROPERTY(EditAnywhere, Category = Montages)
 	class UAnimMontage* FireWeaponMontage;
 
-	UPROPERTY(EditAnywhere, Category = Combat)
-	class UAnimMontage* HitReactMontage;
+	UPROPERTY(EditAnywhere, Category = Montages)
+	class UAnimMontage* ReloadWeaponMontage;
 	
-	UPROPERTY(EditAnywhere, Category = Combat)
+	UPROPERTY(EditAnywhere, Category = Montages)
+	class UAnimMontage* HitReactMontage;
+
+	UPROPERTY(EditAnywhere, Category = Montages)
 	class UAnimMontage* DeathMontage;
 
-	void CameraCharacterCulling();
-	UPROPERTY(EditAnywhere)
-	float CullingThreshold = 200.f;
+	//void CameraCharacterCulling();
+	//UPROPERTY(EditAnywhere)
+	//float CullingThreshold = 200.f;
 
 	bool bShouldRotateBone;
 	float TurnThreshold = 0.5f;
@@ -178,4 +191,8 @@ public:
 	FORCEINLINE float GetHealth() const { return CurrentHealth; }
 
 	FORCEINLINE float GetMaxHealth() const { return MaxHealth; }
+
+	ECombatState GetCombatState() const;
+
+	FORCEINLINE UCombatComponent* GetCombatComponent() const { return CombatComponent; }
 };

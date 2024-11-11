@@ -42,6 +42,7 @@ void UStrifeAnimInstance::NativeUpdateAnimation(float DeltaSeconds)
 	TurningInPlace = StrifeCharacter->GetTurningInPlace();
 	bShouldRotateRootBone = StrifeCharacter->ShouldRotateRootBone();
 	bIsDead = StrifeCharacter->IsDead();
+	bIsReloading = StrifeCharacter->GetCombatState() == ECombatState::ECS_Reloading;
 	
 	// //Strafing
 	// FRotator AimRotation = StrifeCharacter->GetBaseAimRotation();

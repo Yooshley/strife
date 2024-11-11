@@ -215,3 +215,9 @@ void AWeapon::Drop()
 	StrifeOwnerController = nullptr;
 }
 
+void AWeapon::AddAmmo(int32 AmmoToAdd)
+{
+	Ammo = FMath::Clamp(Ammo - AmmoToAdd, 0, MagazineCapacity);
+	SetHUDAmmo();
+}
+
